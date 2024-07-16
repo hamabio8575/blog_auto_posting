@@ -7,7 +7,7 @@ import utils
 import downloaders
 
 
-path = utils.path
+global path
 
 
 print(path)
