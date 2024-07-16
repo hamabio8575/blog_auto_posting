@@ -5,9 +5,9 @@ import posting_utils
 import vpn_utils
 import utils
 import downloaders
+import file_open
 
-
-global path
+path = file_open.new_paht
 
 
 print(path)
