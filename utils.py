@@ -1,7 +1,7 @@
 from moduls import *
 
 global path
-
+path = path
 ### 주소 저장된 파일 선택 함수
 def file_open(model):
     current_directory = os.path.dirname(os.path.abspath(__file__))  # 현재 실행 파일의 경로
