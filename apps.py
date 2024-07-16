@@ -115,12 +115,8 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         # driver.find_element(By.XPATH, "//a[text()='글쓰기']").click()
         wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
         time.sleep(10)
-        # 글쓰기 시작
-        driver.switch_to.window(driver.window_handles[-1])
-        driver.switch_to.default_content()  # 기본 iframe으로 복귀
-        driver.switch_to.frame('mainFrame')
-        time.sleep(1)
 
+        # 글쓰기 시작
         if "작성 중인 글이 있습니다." in driver.page_source:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)
@@ -129,8 +125,11 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         sample_window = driver.current_url
         driver.execute_script(f"window.open('{sample_window}', '_blank');")
 
-        # 원본창으로 돌아가기
+        # 기본창으로 돌아가기
         driver.switch_to.window(driver.window_handles[-2])
+        driver.switch_to.default_content()  # 기본 iframe으로 복귀
+        driver.switch_to.frame('mainFrame')
+        time.sleep(1)
         if "작성 중인 글이 있습니다." in driver.page_source:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)

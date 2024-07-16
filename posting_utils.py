@@ -158,7 +158,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
                         #                 print("●"*30)
 
-                        # 샘플 복붙용창으로 이동
+                        # 기본창으로 이동
                         driver.switch_to.window(driver.window_handles[-2])
                         driver.switch_to.default_content()  # 기본 iframe으로 복귀
                         driver.switch_to.frame('mainFrame')
