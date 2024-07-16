@@ -80,6 +80,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         headless_checked = False
         try:
             driver = driver_utils.driversetting(headless_checked)
+            print("driver 세팅 완료")
         except:
             print("☆ Error driver setting...")
             print("30초후 재개 됩니다.")
