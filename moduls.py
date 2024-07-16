@@ -30,13 +30,15 @@ import requests
 import os
 import random
 from datetime import datetime
+from bs4 import BeautifulSoup
 
 import pywinauto
 from pywinauto import application
 import autoit
 import logging
+import ctypes
 
-import types, json
+import types, json, re
 
 
 # print(pywinauto.__version__) # 0.6.3

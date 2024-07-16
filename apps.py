@@ -11,7 +11,6 @@ path = file_open.new_paht
 
 
 print(path)
-input()
 logger, file_handler = utils.setup_logging()
 
 # 한/영키 확인
