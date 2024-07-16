@@ -73,6 +73,11 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         print(f"동영상 파일들 : {video_file_list}")
         print(f"동영상 파일개수 : {video_file_len}")
 
+        print()
+        print(f"이미지링크 경로 : {image_Link_folder_path}")
+        print(f"이미지링크 파일들 : {imageLink_file_list}")
+        print(f"이미지링크 파일개수 : {imgLink_file_len}")
+
         post_file_path = rf'{path}\자동업로드\{today_date}\원고\{p_title}.txt'
         post_file_path = os.path.normpath(post_file_path)  # 동영상 경로 표준화
 
@@ -209,10 +214,11 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     except Exception as e:
         print(e)
         logger.error(f"■ [{number}] {post_title} 포스팅 실패")
-        for _ in range(len(driver.window_handles)):
-            driver.switch_to.window(driver.window_handles[-1])
-            driver.close()
-            time.sleep(0.5)
+        input()
+        # for _ in range(len(driver.window_handles)):
+        #     driver.switch_to.window(driver.window_handles[-1])
+        #     driver.close()
+        #     time.sleep(0.5)
         # try:
         #     vpn_utils.mvpn_close(dlg)
         # except:
