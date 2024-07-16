@@ -4,7 +4,11 @@ from moduls import *
 def driversetting(headless_checked):
     options = uc.ChromeOptions()
     options.add_argument(f"user-agent={UserAgent.random}")
+    options.add_argument(
+        "--disable-blink-features=AutomationControlled")  # navigatoer.webdriver = False로 변경하기
+
     options.add_argument("--no-first-run --no-service-autorun --password-store=basic")
+
     options.add_argument('--disable-logging')
     # origin 허용(동적데이터 불러오기)
     options.add_argument("--disable-web-security")

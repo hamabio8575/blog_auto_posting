@@ -112,29 +112,34 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         # 글쓰기 클릭
         driver.switch_to.window(driver.window_handles[-1])
         wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
-        time.sleep(10)
+        time.sleep(1)
 
-        # 글쓰기 시작
         driver.switch_to.window(driver.window_handles[-1])
         driver.switch_to.default_content()  # 기본 iframe으로 복귀
         driver.switch_to.frame('mainFrame')
-        sample_window = driver.current_url
+        time.sleep(1)
+        soup = driver.page_source
+        print(soup)
+        if "작성 중인 글이 있습니다." in soup:
+            print("있다")
+            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
+            time.sleep(3)
+
+
+        # 복붙용 크롬창 열기 (실제로는 여기에 작성)
+        driver.switch_to.window(driver.window_handles[-2])
+        wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
+
+        # 글쓰기 시작
+        driver.switch_to.default_content()  # 기본 iframe으로 복귀
+        driver.switch_to.frame('mainFrame')
+
         time.sleep(3)
         if "작성 중인 글이 있습니다." in driver.page_source:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)
 
-        # sample용 새창 열기
-        print(sample_window)
-        print(f"window.open('{sample_window}', '_blank');")
-        driver.execute_script(f"window.open('{sample_window}', '_blank');")
 
-        input("??")
-        # 원본창으로 돌아가기
-        driver.switch_to.window(driver.window_handles[-2])
-        if "작성 중인 글이 있습니다." in driver.page_source:
-            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
-            time.sleep(3)
 
         # 중요!!!! 브라우저 패널의 높이값
         panel_height = driver.execute_script('return window.outerHeight - window.innerHeight;')
