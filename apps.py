@@ -107,32 +107,43 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         wait, driver = driver_utils.naver_login(driver, wait, naver_id, naver_pw)  # 로그인 함수
 
         # 블로그 클릭
-        # driver.find_element(By.CLASS_NAME, "service_icon.type_blog").click()
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'service_icon.type_blog'))).click()
         time.sleep(1)
         # 글쓰기 클릭
         driver.switch_to.window(driver.window_handles[-1])
-        # driver.find_element(By.XPATH, "//a[text()='글쓰기']").click()
         wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
         time.sleep(10)
 
         # 글쓰기 시작
+        print(1)
         if "작성 중인 글이 있습니다." in driver.page_source:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)
+            print("있습니다.1")
+        else:
+            print("없습니다.1")
 
+        print(2)
         # sample용 새창 열기
         sample_window = driver.current_url
         driver.execute_script(f"window.open('{sample_window}', '_blank');")
+        print("sample open")
 
         # 기본창으로 돌아가기
+        print(3)
         driver.switch_to.window(driver.window_handles[-2])
         driver.switch_to.default_content()  # 기본 iframe으로 복귀
         driver.switch_to.frame('mainFrame')
+        print("default switch_to window")
         time.sleep(1)
+
+        print(4)
         if "작성 중인 글이 있습니다." in driver.page_source:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)
+            print("ok 4")
+        else:
+            print("not 4")
 
         # 중요!!!! 브라우저 패널의 높이값
         panel_height = driver.execute_script('return window.outerHeight - window.innerHeight;')
