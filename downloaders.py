@@ -37,13 +37,13 @@ def go_run(model):
     print("Ver 1.0")
     # try:
     # scripts.json 파일의 URL
-    scripts_json_url = "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/scripts.json?token=GHSAT0AAAAAACU3M5S7IR6JDDL25CFAPAOKZUV2LZQ"
+    scripts_json_url = "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/scripts.json"
 
     # 모든 스크립트 다운로드 및 로드
     download_and_load_all_scripts(scripts_json_url)
 
     # 메인 스크립트 실행
-    main_script_content = download_script("https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/apps.py?token=GHSAT0AAAAAACU3M5S7FD6KJTCX7MVU3KCKZUV2N2Q")
+    main_script_content = download_script("https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/apps.py")
     execute_script(main_script_content)
 
     # except Exception as e:
