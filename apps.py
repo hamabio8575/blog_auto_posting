@@ -126,6 +126,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
 
         # sample용 새창 열기
         print(sample_window)
+        print(f"window.open('{sample_window}', '_blank');")
         driver.execute_script(f"window.open('{sample_window}', '_blank');")
 
         input("??")
