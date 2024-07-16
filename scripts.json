@@ -1,0 +1,13 @@
+{
+    "scripts": [
+        "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/moduls.py?token=GHSAT0AAAAAACU3M5S62TSCC4LWYF756V66ZUV2GYA",
+        "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/password_check.py?token=GHSAT0AAAAAACU3M5S6FUH33KZKRZCA6LTUZUV2HGA",
+        "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/utils.py?token=GHSAT0AAAAAACU3M5S6GCSDL5QACGT7JMCEZUV2HNA",
+        "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/driver_utils.py?token=GHSAT0AAAAAACU3M5S654W4KQ5QTOVLYH7AZUV2HTA",
+        "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/posting_utils.py?token=GHSAT0AAAAAACU3M5S6VG7IJKIDHYZKKN6KZUV2H6A",
+        "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/vpn_utils.py?token=GHSAT0AAAAAACU3M5S7M2DYFCWP73CEAMNKZUV2ILQ",
+        "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/apps.py?token=GHSAT0AAAAAACU3M5S62JHYFEBYJVWLQS5MZUV2IXA"
+
+
+    ]
+}
