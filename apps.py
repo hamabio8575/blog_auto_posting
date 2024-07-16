@@ -171,6 +171,8 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         time.sleep(3)
         driver.find_elements(By.XPATH, "//span[text()='발행']")[-1].click()
 
+        input("발행 완료")
+
         time.sleep(3)
         for _ in range(len(driver.window_handles)):
             driver.switch_to.window(driver.window_handles[-1])
