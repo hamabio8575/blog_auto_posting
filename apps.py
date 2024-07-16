@@ -124,6 +124,17 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         if "작성 중인 글이 있습니다." in driver.page_source:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)
+
+        # sample용 새창 열기
+        sample_window = driver.current_url
+        driver.execute_script(f"window.open('{sample_window}', '_blank');")
+
+        # 원본창으로 돌아가기
+        driver.switch_to.window(driver.window_handles[-2])
+        if "작성 중인 글이 있습니다." in driver.page_source:
+            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
+            time.sleep(3)
+
         # 중요!!!! 브라우저 패널의 높이값
         panel_height = driver.execute_script('return window.outerHeight - window.innerHeight;')
 
