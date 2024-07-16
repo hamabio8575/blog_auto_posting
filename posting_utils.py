@@ -303,7 +303,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     if e == '①':
                         is_numlock_on()
                         pyautogui.hotkey('ctrl', 'alt', 'q')
-                        time.sleep(1)
+                        time.sleep(3)
 
                     # 인용구 종료이면 커서 내리기
                     elif e == 'ⓟ':
