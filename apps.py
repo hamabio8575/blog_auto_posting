@@ -125,15 +125,11 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
 
 
         # 복붙용 크롬창 열기 (실제로는 여기에 작성)
-        print(1)
         driver.switch_to.window(driver.window_handles[-2])
-        print(2)
-        input()
         wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
-        print(3)
-        input()
 
         # 글쓰기 시작
+        driver.switch_to.window(driver.window_handles[-2])
         driver.switch_to.default_content()  # 기본 iframe으로 복귀
         driver.switch_to.frame('mainFrame')
 
