@@ -81,8 +81,8 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         # 파일 읽기
         with open(post_file_path, 'r', encoding='utf-8') as file:
             file.seek(0)  # 파일 포인터를 파일의 처음으로 이동 (첫줄이 빈문자열로 나오는걸 방지하기 위함)
-            post_title = file.readline().strip()
-            original_post = file.read()
+            post_title = file.readline().strip() # 제목
+            original_post = file.read() # 본문
         # 출력 확인
         print(post_title)
 
@@ -157,8 +157,8 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         abs_y = y + panel_height
         pyautogui.click(abs_x + 20, abs_y + 20)
         time.sleep(3)
-        pyautogui.press("T")
-        # posting_run(original_post, image_folder_path, img_file_len, video_folder_path, video_file_len, driver, wait, post_title, p_title)
+        posting_utils.posting_run(original_post, image_folder_path, img_file_len, video_folder_path, video_file_len,
+                                  imageLink_folder_path, imgLink_file_len, driver, wait, post_title, p_title)
 
         # 도움말 있는지 체크
         # 도움말이 있으면 발행버튼이 안눌림
