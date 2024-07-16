@@ -119,12 +119,13 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         driver.switch_to.default_content()  # 기본 iframe으로 복귀
         driver.switch_to.frame('mainFrame')
         sample_window = driver.current_url
-        time.sleep(1)
+        time.sleep(3)
         if "작성 중인 글이 있습니다." in driver.page_source:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)
 
         # sample용 새창 열기
+        print(sample_window)
         driver.execute_script(f"window.open('{sample_window}', '_blank');")
 
         input("??")
