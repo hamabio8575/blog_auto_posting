@@ -125,15 +125,9 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
             time.sleep(3)
 
         # sample용 새창 열기
-        driver.switch_to.window(driver.window_handles[-1])
-        print(sample_window)
-        input()
-        driver.get(sample_window)
-
-
-        sample_window = driver.current_url
         driver.execute_script(f"window.open('{sample_window}', '_blank');")
 
+        input("??")
         # 원본창으로 돌아가기
         driver.switch_to.window(driver.window_handles[-2])
         if "작성 중인 글이 있습니다." in driver.page_source:
