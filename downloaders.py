@@ -6,9 +6,12 @@ global new_model
 def go_run(model):
     global new_model
     new_model = model
-
+    GITHUB_TOKEN = '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'
     def download_script(url):
-        headers = {'Cache-Control': 'no-cache'}
+        headers = {
+            'Authorization': f'token {GITHUB_TOKEN}',
+            'Cache-Control': 'no-cache'
+        }
         response = requests.get(url, headers=headers)
         response.raise_for_status()
         return response.text
