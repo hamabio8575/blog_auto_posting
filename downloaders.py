@@ -26,13 +26,13 @@ def go_run(model):
     def execute_script(script_content):
         exec(script_content, globals())
 
-
-    def download_and_load_all_scripts(scripts_json_url):
-        scripts_content = download_script(scripts_json_url)
+    def download_and_load_all_scripts(repo, scripts_json_path):
+        scripts_content = download_script(repo, scripts_json_path)
         scripts_data = json.loads(scripts_content)
-        for script_url in scripts_data["scripts"]:
-            script_name = script_url.split('/')[-1].split('.')[0]
-            script_content = download_script(script_url)
+
+        for script_path in scripts_data["scripts"]:
+            script_name = script_path.split('/')[-1].split('.')[0]
+            script_content = download_script(repo, script_path)
             load_module_from_string(script_name, script_content)
 
     print("Ver 1.0")
