@@ -5,7 +5,7 @@ import posting_utils
 import vpn_utils
 import utils
 import downloaders
-
+global path
 
 ### 주소 저장된 파일 선택 함수
 def file_open(model):
