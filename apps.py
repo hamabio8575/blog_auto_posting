@@ -5,14 +5,9 @@ import posting_utils
 import vpn_utils
 import utils
 import downloaders
-global path
 
-### 주소 저장된 파일 선택 함수
-def file_open(model):
-    global path
-    current_directory = os.path.dirname(os.path.abspath(__file__))  # 현재 실행 파일의 경로
-    path = QFileDialog.getExistingDirectory(model, '폴더 선택', current_directory)
-    model.textBrowser.append(f"선택 폴더 -- {path}\n")
+
+path = utils.path
 
 
 print(path)
