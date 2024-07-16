@@ -57,14 +57,14 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
 
         print()
         print(f"동영상 경로 : {video_folder_path}")
-        print(f"이미지 파일들 : {video_file_list}")
-        print(f"이미지 파일개수 : {video_file_len}")
+        print(f"동영상 파일들 : {video_file_list}")
+        print(f"동영상 파일개수 : {video_file_len}")
 
         post_file_path = rf'{path}\자동업로드\{today_date}\원고\{p_title}.txt'
         post_file_path = os.path.normpath(post_file_path)  # 동영상 경로 표준화
 
         print()
-        print(f"포스팅 원고파일 제목 : {post_file_path}")
+        print(f"포스팅 원고파일 경로 : {post_file_path}")
         # 파일 읽기
         with open(post_file_path, 'r', encoding='utf-8') as file:
             file.seek(0)  # 파일 포인터를 파일의 처음으로 이동 (첫줄이 빈문자열로 나오는걸 방지하기 위함)
@@ -74,7 +74,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         print(post_title)
 
         # mvpn 접속
-        dlg = vpn_utils.mvpn_connect(downloaders.new_model , vpn_id, vpn_pw)
+        # dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
 
         ### 네이버 로그인
         headless_checked = False
@@ -163,7 +163,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
             driver.close()
             time.sleep(0.5)
         time.sleep(3)
-        vpn_utils.mvpn_close(dlg)
+        # vpn_utils.mvpn_close(dlg)
         time.sleep(3)
 
         minutes, seconds = utils.get_lab_time(start_time)
@@ -178,7 +178,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
             driver.switch_to.window(driver.window_handles[-1])
             driver.close()
             time.sleep(0.5)
-        try:
-            vpn_utils.mvpn_close(dlg)
-        except:
-            pass
+        # try:
+        #     vpn_utils.mvpn_close(dlg)
+        # except:
+        #     pass
