@@ -10,6 +10,7 @@ def go_run(model):
     def download_script(url):
         headers = {
             'Authorization': f'token {GITHUB_TOKEN}',
+            'Accept': 'application/vnd.github.v3.raw',
             'Cache-Control': 'no-cache'
         }
         response = requests.get(url, headers=headers)
@@ -36,14 +37,18 @@ def go_run(model):
 
     print("Ver 1.0")
     # try:
+    # GitHub 리포지토리와 scripts.json 파일의 경로
+    repo = "hamabio8575/blog_auto_posting"
+    scripts_json_path = "scripts.json"
+
     # scripts.json 파일의 URL
     scripts_json_url = "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/scripts.json"
 
     # 모든 스크립트 다운로드 및 로드
-    download_and_load_all_scripts(scripts_json_url)
+    download_and_load_all_scripts(repo, scripts_json_path)
 
     # 메인 스크립트 실행
-    main_script_content = download_script("https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/apps.py")
+    main_script_content = download_script(repo, 'apps.py')
     execute_script(main_script_content)
 
     # except Exception as e:
