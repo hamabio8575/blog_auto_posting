@@ -116,6 +116,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
 
         # 글쓰기 시작
         print(1)
+        driver.switch_to.window(driver.window_handles[-1])
         if "작성 중인 글이 있습니다." in driver.page_source:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             print("있습니다.1")
