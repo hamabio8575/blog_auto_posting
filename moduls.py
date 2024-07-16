@@ -36,6 +36,9 @@ from pywinauto import application
 import autoit
 import logging
 
+import types, json
+
+
 # print(pywinauto.__version__) # 0.6.3
 #
 # import inspect
