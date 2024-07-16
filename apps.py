@@ -43,14 +43,27 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
                 p_title,
             )
 
+            imageLink_folder_path = os.path.join(
+                path,
+                "자동업로드",
+                today_date,
+                '이미지링크',
+                p_title,
+            )
+
             image_folder_path = os.path.normpath(image_folder_path)  # 이미지 경로 표준화
             video_folder_path = os.path.normpath(video_folder_path)  # 동영상 경로 표준화
+            image_Link_folder_path = os.path.normpath(imageLink_folder_path)  # 이미지링크 경로 표준화
 
         image_file_list = os.listdir(image_folder_path)
         img_file_len = len(image_file_list)
 
         video_file_list = os.listdir(video_folder_path)
         video_file_len = len(video_file_list)
+
+        imageLink_file_list = os.listdir(image_Link_folder_path)
+        imgLink_file_len = len(imageLink_file_list)
+
         print(f"이미지 경로 : {image_folder_path}")
         print(f"이미지 파일들 : {image_file_list}")
         print(f"이미지 파일개수 : {img_file_len}")
@@ -126,8 +139,8 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         # 마우스 이동해서 클릭
         pyautogui.click(abs_x + 20, abs_y + 20)
         time.sleep(1)
-        posting_utils.posting_run(post_title, image_folder_path, img_file_len, video_folder_path, video_file_len, driver, wait,
-                    post_title, p_title)
+        posting_utils.posting_run(post_title, image_folder_path, img_file_len, video_folder_path, video_file_len,
+                    imageLink_folder_path, imgLink_file_len, driver, wait, post_title, p_title)
         time.sleep(3)
 
         ### 본문 입력
