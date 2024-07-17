@@ -2,7 +2,7 @@ from moduls import *
 
 
 def password_check_run(model):
-    model.label_14.setText("로그인중...")
+    model.label_7.setText("로그인 시도중..")
     scope = [
         'https://spreadsheets.google.com/feeds',
         'https://www.googleapis.com/auth/drive',
@@ -20,13 +20,17 @@ def password_check_run(model):
     header, rows = values[0], values[1:]  # 0번째 인덱스를 컬럼으로 , 1부터 모든값을 행값으로
     df_db = pd.DataFrame(rows, columns=header)  # 데이터프레임으로 변환
 
-    if model.lineEdit_11.text() == df_db['password'][0]:
-        print("성공")
-        model.label_14.setText("로그인 성공")
-        model.label.setText("")
-        model.tab_2.setDisabled(False)
-        model.tab.setDisabled(True)
+    if model.lineEdit.text() == df_db['password'][0]:
+        print("일치")
+
+        model.pushButton.setText("로그인 완료")
+        model.label_7.setText("")
+        model.lineEdit.setEnabled(False)  # 비밀번호 입력창 비활성화
+        model.pushButton.setEnabled(False)  # 로그인 버튼 비활성화
+        model.textBrowser_2.hide()
+        model.frame.show()
 
     else:
-        model.label_14.setText("로그인 실패..\n비밀번호를 다시 입력해 주세요.")
+        model.label_7.setText("로그인 실패..")
+
 

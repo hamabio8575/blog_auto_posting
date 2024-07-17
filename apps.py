@@ -122,7 +122,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         driver.switch_to.window(driver.window_handles[-1])
         driver.switch_to.default_content()  # 기본 iframe으로 복귀
         driver.switch_to.frame('mainFrame')
-        time.sleep(1)
+        time.sleep(5)
         soup = driver.page_source
         if "작성 중인 글이 있습니다." in soup:
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
