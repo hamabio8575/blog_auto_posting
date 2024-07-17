@@ -92,7 +92,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         print(post_title)
 
         # mvpn 접속
-        # dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
+        dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
 
         ### 네이버 로그인
         headless_checked = False
@@ -203,7 +203,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
             driver.close()
             time.sleep(0.5)
         time.sleep(3)
-        # vpn_utils.mvpn_close(dlg)
+        vpn_utils.mvpn_close(dlg)
         time.sleep(3)
 
         minutes, seconds = utils.get_lab_time(start_time)
@@ -214,12 +214,14 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     except Exception as e:
         print(e)
         logger.error(f"■ [{number}] {post_title} 포스팅 실패")
-        input()
-        # for _ in range(len(driver.window_handles)):
-        #     driver.switch_to.window(driver.window_handles[-1])
-        #     driver.close()
-        #     time.sleep(0.5)
-        # try:
-        #     vpn_utils.mvpn_close(dlg)
-        # except:
-        #     pass
+        try:
+            for _ in range(len(driver.window_handles)):
+                driver.switch_to.window(driver.window_handles[-1])
+                driver.close()
+                time.sleep(0.5)
+            try:
+                vpn_utils.mvpn_close(dlg)
+            except:
+                pass
+        except:
+            pass
