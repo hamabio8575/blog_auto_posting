@@ -42,7 +42,7 @@ def setup_logging():
     logfilename = f"{current_time.strftime('%Y%m%d')} 로그.log"
 
     # 로거 생성
-    logger = logging.getLogger('토지대장 로그')
+    logger = logging.getLogger('블로그 자동업로드')
     logger.setLevel(logging.DEBUG)
 
     # 기존 핸들러 제거
