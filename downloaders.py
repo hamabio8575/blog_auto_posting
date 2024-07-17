@@ -31,7 +31,7 @@ def go_run(model):
             script_content = download_script(script_url)
             load_module_from_string(script_name, script_content)
 
-    print("Ver 1.0")
+    print("Ver 2.0")
     # try:
     # scripts.json 파일의 URL
     scripts_json_url = "https://raw.githubusercontent.com/hamabio8575/blog_auto_posting/main/scripts.json"

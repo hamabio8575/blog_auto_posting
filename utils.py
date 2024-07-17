@@ -25,7 +25,7 @@ def get_today_date():
     return formatted_date
 
 
-# 소요시간 계산산
+# 소요시간 계산
 def get_lab_time(start_time):
     end_time = time.time()  # 종료 시간 기록
     # 총 소요 시간 계산
