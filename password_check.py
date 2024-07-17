@@ -24,6 +24,8 @@ def password_check_run(model):
         print("일치")
 
         model.pushButton.setText("로그인 완료")
+        model.pushButton.setStyleSheet("height: 20px; background-color: #787878; color: white; border:2px solid; border-radius: 5px;")
+
         model.label_7.setText("")
         model.lineEdit.setEnabled(False)  # 비밀번호 입력창 비활성화
         model.pushButton.setEnabled(False)  # 로그인 버튼 비활성화
