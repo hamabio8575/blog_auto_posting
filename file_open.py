@@ -12,3 +12,12 @@ def file_button(model):
     new_paht = path
 
     model.textBrowser.append(f"선택 폴더 -- {path}\n")
+
+
+def logfile_open(model):
+    current_time = datetime.today()
+    logfilename = f"{current_time.strftime('%Y%m%d')} 로그.log"
+    try:
+        os.startfile(logfilename)
+    except:
+        print(f"당일({current_time.strftime('%Y%m%d')})로그가 없습니다.")
