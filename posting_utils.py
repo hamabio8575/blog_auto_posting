@@ -221,7 +221,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         time.sleep(1)
                         for _ in range(10):
                             pyautogui.press("up")
-                        time.sleep(1)
+                        time.sleep(3)
 
                         panel_height = driver.execute_script('return window.outerHeight - window.innerHeight;')
                         # 이미지 element
@@ -233,7 +233,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         abs_y = y + panel_height + 200
                         # 마우스 이동해서 클릭
                         pyautogui.moveTo(abs_x, abs_y)
-                        time.sleep(1)
+                        time.sleep(3)
                         pyautogui.click()
                         time.sleep(1)
                         pyautogui.hotkey('ctrl', 'c')
