@@ -227,10 +227,10 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         # 이미지 element
                         posting_image = driver.find_elements(By.TAG_NAME, 'section')[0].find_element(By.TAG_NAME, 'img')
                         # 제목 입력 element의 x 값 가져오기 (절대값)
-                        abs_x = posting_image.location['x'] + 20
+                        abs_x = posting_image.location['x'] + 200
                         # 제목 입력 element의 y 값 가져오기 (상대값, 브라우저에 있는 y값)
                         y = posting_image.location['y']
-                        abs_y = y + panel_height + 20
+                        abs_y = y + panel_height + 200
                         # 마우스 이동해서 클릭
                         pyautogui.moveTo(abs_x, abs_y)
                         time.sleep(1)
