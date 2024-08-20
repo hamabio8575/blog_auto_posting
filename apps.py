@@ -123,8 +123,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         driver.switch_to.default_content()  # 기본 iframe으로 복귀
         driver.switch_to.frame('mainFrame')
         time.sleep(5)
-        soup = driver.page_source
-        if "작성 중인 글이 있습니다." in soup:
+        if "작성 중인 글이 있습니다." in str(driver.page_source):
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)
 
@@ -142,10 +141,15 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         driver.switch_to.frame('mainFrame')
 
         time.sleep(3)
-        if "작성 중인 글이 있습니다." in driver.page_source:
+        if "작성 중인 글이 있습니다." in str(driver.page_source):
             wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
             time.sleep(3)
 
+        # 도움말 있는지 체크
+        # 도움말이 있으면 발행버튼이 안눌림
+        if 'se-help-panel-close-button' in str(driver.page_source):
+            print('있다')
+            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-help-panel-close-button"))).click()
 
 
         # 중요!!!! 브라우저 패널의 높이값
