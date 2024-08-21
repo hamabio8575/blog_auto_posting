@@ -174,8 +174,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         ### 본문 입력
         # 본문 입력 element
         pyautogui.press('hangul')
-        contents_input_box = driver.find_element(By.CLASS_NAME,
-                                                 "se-placeholder.__se_placeholder.se-ff-nanumgothic.se-fs15")
+        contents_input_box = driver.find_element(By.CLASS_NAME,"se-canvas-bottom")
         # 본문 입력 element
         panel_height = driver.execute_script('return window.outerHeight - window.innerHeight;')
         # 본문 입력 element의 x 값 가져오기 (절대값)
@@ -183,7 +182,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         # 본문 입력 element의 y 값 가져오기 (상대값, 브라우저에 있는 y값)
         y = contents_input_box.location['y']
         abs_y = y + panel_height
-        pyautogui.click(abs_x + 20, abs_y + 20)
+        pyautogui.click(abs_x + 1000, abs_y + 200)
         time.sleep(3)
         posting_utils.posting_run(original_post, image_folder_path, img_file_len, video_folder_path, video_file_len,
                                   imageLink_folder_path, imgLink_file_len, driver, wait, post_title, p_title)
