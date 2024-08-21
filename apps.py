@@ -6,7 +6,6 @@ import vpn_utils
 import utils
 import downloaders
 import file_open
-print("발행 변경")
 path = file_open.new_paht
 
 
