@@ -241,8 +241,9 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         time.sleep(1)
                         pyautogui.hotkey('ctrl', 'c')
                         time.sleep(1)
-                        pyautogui.press('delete')
-                        time.sleep(1)
+                        for _ in range(3):
+                            pyautogui.press('delete')
+                            time.sleep(1)
 
                         # 원본창 으로 이동
                         driver.switch_to.window(driver.window_handles[-2])
