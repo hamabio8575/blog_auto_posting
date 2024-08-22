@@ -191,7 +191,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     if 'se-help-panel-close-button' in str(driver.page_source):
         print('있다')
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-help-panel-close-button"))).click()
-
+    input()
     # 발행
     wait.until(EC.presence_of_element_located((By.CLASS_NAME, "publish_btn__m9KHH"))).click()
     time.sleep(3)
