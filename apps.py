@@ -6,9 +6,9 @@ import vpn_utils
 import utils
 import downloaders
 import file_open
+
+
 path = file_open.new_paht
-
-
 print(path)
 logger, file_handler = utils.setup_logging()
 
@@ -91,7 +91,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     print(post_title)
 
     # mvpn 접속
-    dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
+    # dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
 
     ### 네이버 로그인
     headless_checked = False
@@ -193,8 +193,6 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-help-panel-close-button"))).click()
 
     # 발행
-
-    # 발행
     wait.until(EC.presence_of_element_located((By.CLASS_NAME, "publish_btn__m9KHH"))).click()
     time.sleep(3)
     wait.until(EC.presence_of_element_located((By.CLASS_NAME, "confirm_btn__WEaBq"))).click()
@@ -207,7 +205,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         driver.close()
         time.sleep(0.5)
     time.sleep(3)
-    vpn_utils.mvpn_close(dlg)
+    # vpn_utils.mvpn_close(dlg)
     time.sleep(3)
 
     minutes, seconds = utils.get_lab_time(start_time)
