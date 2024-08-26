@@ -40,7 +40,8 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
     posting = write_contents
     # posting = '안녕하세요\n제이름은\n윤성노 입니다.\n나이는 39세이고\n대한민국 사람입니다.\n잘부탁드립니다.\n'
-    posting= posting.replace("  ", " ").replace("\n", "\n ")
+    posting = posting.replace("\xa0", " ")
+    posting = posting.replace("  ", " ").replace("\n", "\n ")
 
     # 한글 초성, 중성, 종성 리스트 정의
     CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
@@ -121,8 +122,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
             elif rl[0] in little_alpha_list or rl[0] in big_alpha_list:
                 alpha_index.append(ri)
             elif rl[0] == '(':
-                if rl[1] in little_alpha_list or rl[1] in big_alpha_list:
-                    alpha_index.append(ri)
+                if len(rl) == 1:
+                    pass
+                else:
+                    if rl[1] in little_alpha_list or rl[1] in big_alpha_list:
+                        alpha_index.append(ri)
 
     # 최종적으로 영문으로 변환된 리스트를 담을 리스트 생성
     final_eng_list = "".join(eng_post_list).split(" ")
