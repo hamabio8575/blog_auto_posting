@@ -322,6 +322,9 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         time.sleep(1)
                         pyautogui.press('down')
                         time.sleep(1)
+                        pyperclip.copy(" ")
+                        pyautogui.hotkey('ctrl', 'v')
+                        pyautogui.press('backspace')
 
                     # 볼드체
                     elif e == 'ⓑ':
