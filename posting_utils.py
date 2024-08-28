@@ -170,9 +170,10 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         # 사진 아이콘 클릭
                         # driver.find_element(By.CLASS_NAME,
                         #                     'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
-                        wait.until(EC.presence_of_element_located((By.CLASS_NAME,
-                                                                    "se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry"
-                                                                    ))).click()
+                        # wait.until(EC.presence_of_element_located((By.CLASS_NAME,
+                        #                                             "se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry"
+                        #                                             ))).click()
+                        pyautogui.hotkey('ctrl', 'alt', 'i')
                         time.sleep(2)
 
                         autoit.control_focus("열기", "")
@@ -203,8 +204,9 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         driver.switch_to.frame('mainFrame')
 
                         # 사진 아이콘 클릭
-                        driver.find_element(By.CLASS_NAME,
-                                            'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
+                        # driver.find_element(By.CLASS_NAME,
+                        #                     'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
+                        pyautogui.hotkey('ctrl', 'alt', 'i')
                         time.sleep(2)
 
                         autoit.control_focus("열기", "")
@@ -268,7 +270,8 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         driver.switch_to.frame('mainFrame')
 
                         # 동영상 클릭
-                        wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='동영상']"))).click()
+                        # wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='동영상']"))).click()
+                        pyautogui.hotkey('ctrl', 'alt', 'm')
                         # 동영상 추가 클릭
                         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "nvu_btn_append.nvu_local"))).click()
                         time.sleep(2)
