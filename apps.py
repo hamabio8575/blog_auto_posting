@@ -121,10 +121,14 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     driver.switch_to.window(driver.window_handles[-1])
     driver.switch_to.default_content()  # 기본 iframe으로 복귀
     driver.switch_to.frame('mainFrame')
+
+    # 작성 중인 글이 있습니다
     time.sleep(5)
-    if "작성 중인 글이 있습니다." in str(driver.page_source):
+    try:
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
         time.sleep(3)
+    except:
+        print("popup_exception")
 
 
     # 복붙용 크롬창 열기 (실제로는 여기에 작성)
@@ -139,10 +143,13 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     driver.switch_to.default_content()  # 기본 iframe으로 복귀
     driver.switch_to.frame('mainFrame')
 
-    time.sleep(3)
-    if "작성 중인 글이 있습니다." in str(driver.page_source):
+    # 작성 중인 글이 있습니다
+    time.sleep(5)
+    try:
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "se-popup-button-text"))).click()
         time.sleep(3)
+    except:
+        print("popup_exception")
 
     # 도움말 있는지 체크
     # 도움말이 있으면 발행버튼이 안눌림

@@ -296,14 +296,15 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                                 wait.until(
                                     EC.presence_of_element_located((By.ID, "nvu_inp_box_description"))).send_keys(
                                     p_title)
-                                # 태크추가 클릭
+                                # 태그추가 클릭
                                 wait.until(EC.presence_of_element_located((By.CLASS_NAME, "nvu_tag_label"))).click()
-                                # 태크 입력
+                                # 태그 입력
                                 wait.until(EC.presence_of_element_located((By.CLASS_NAME, "nvu_tag_inp"))).send_keys(
                                     p_title.replace(" ", ""))
                                 wait.until(EC.presence_of_element_located(
                                     (By.CLASS_NAME, "nvu_btn_submit.nvu_btn_type2"))).click()
                                 print(f"영상 ({video_cnt}).mp4 업로드 완료")
+                                time.sleep(3)
                                 break
 
                 elif e == '%':  # 구분선
