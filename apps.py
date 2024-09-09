@@ -183,7 +183,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     pyautogui.click(abs_x + 20, abs_y + 20)
     time.sleep(1)
     posting_utils.posting_run(post_title, image_folder_path, img_file_len, video_folder_path, video_file_len,
-                imageLink_folder_path, imgLink_file_len, driver, wait, post_title, p_title)
+                imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, driver, wait, post_title, p_title)
     time.sleep(3)
 
     ### 본문 입력
@@ -200,7 +200,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     pyautogui.click(abs_x + 1000, abs_y + 200)
     time.sleep(3)
     posting_utils.posting_run(original_post, image_folder_path, img_file_len, video_folder_path, video_file_len,
-                              imageLink_folder_path, imgLink_file_len, driver, wait, post_title, p_title)
+                              imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, driver, wait, post_title, p_title)
 
     # 도움말 있는지 체크
     # 도움말이 있으면 발행버튼이 안눌림

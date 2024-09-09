@@ -29,7 +29,7 @@ def is_numlock_on():
         print("Num lock이 Off 입니다")
 
 
-def posting_run(write_contents, image_folder_path, img_file_len, video_folder_path, video_file_len, imageLink_folder_path, imgLink_file_len,driver, wait, post_title, p_title):
+def posting_run(write_contents, image_folder_path, img_file_len, video_folder_path, video_file_len, imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, driver, wait, post_title, p_title):
     from string import ascii_lowercase, ascii_uppercase
     import time, pyautogui
 
@@ -158,7 +158,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     if img_cnt > img_file_len:
                         pass
                     else:
-                        image_file_path = rf"{image_folder_path}\이미지 ({img_cnt}).jpg"
+                        image_file_path = rf"{image_folder_path}\{image_file_list[img_cnt-1]}"
 
                         #                 print("●"*30)
 
@@ -196,7 +196,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     if img_link_cnt > imgLink_file_len:
                         pass
                     else:
-                        imageLink_file_path = rf"{imageLink_folder_path}\이미지 ({img_link_cnt}).jpg"
+                        imageLink_file_path = rf"{imageLink_folder_path}\{imageLink_file_list[img_link_cnt+1]}"
 
                         # 샘플 복붙용창으로 이동
                         driver.switch_to.window(driver.window_handles[-1])
@@ -262,7 +262,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     if video_cnt > video_file_len:
                         pass
                     else:
-                        video_file_path = rf"{video_folder_path}\영상 ({video_cnt}).mp4"
+                        video_file_path = rf"{video_folder_path}\{video_file_list[video_cnt+1]}"
 
                         # 원본창으로 이동
                         driver.switch_to.window(driver.window_handles[-2])
