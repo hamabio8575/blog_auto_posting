@@ -70,9 +70,8 @@ def extract_number(file_name):
     return 0  # 숫자를 찾지 못하면 0을 반환 (필요시 다른 값을 반환하도록 수정 가능)
 
 
-def file_size_check():
+def file_size_check(path):
     ### 이미지 크기 체크
-    path = r"C:\Users\ysn39\파이썬 주피터\숨고\한마음 바이오\타이핑 테스트\server2019"
 
     today = datetime.today()
     today_date = get_today_date()  # 오늘 날짜 확인 // format : 5월24일
