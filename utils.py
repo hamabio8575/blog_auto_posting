@@ -103,15 +103,10 @@ def file_size_check(path):
 
 
             image_folder_path = os.path.normpath(image_folder_path)  # 이미지 경로 표준화
-            image_Link_folder_path = os.path.normpath(imageLink_folder_path)  # 이미지링크 경로 표준화
 
         image_file_list = os.listdir(image_folder_path)
         image_file_list = sorted(image_file_list, key=extract_number)
         img_file_len = len(image_file_list)
-
-        imageLink_file_list = os.listdir(image_Link_folder_path)
-        imageLink_file_list = sorted(imageLink_file_list, key=extract_number)
-        imgLink_file_len = len(imageLink_file_list)
 
         for file_name in image_file_list:
             file_path = os.path.join(image_folder_path, file_name)
@@ -129,6 +124,42 @@ def file_size_check(path):
                 image_over_size_list.append(f"{p_title} -- {file_name} 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
 
 
+    image_link_over_size_list = []
+    for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy().tolist():
+        print(p_title)
+        start_time = time.time()
+        if path:
+            # 이미지 링크 경로 생성
+            imageLink_folder_path = os.path.join(
+                path,
+                "자동업로드",
+                today_date,
+                '이미지링크',
+                p_title,
+            )
+
+            image_Link_folder_path = os.path.normpath(imageLink_folder_path)  # 이미지링크 경로 표준화
+
+        imageLink_file_list = os.listdir(image_Link_folder_path)
+        imageLink_file_list = sorted(imageLink_file_list, key=extract_number)
+        imgLink_file_len = len(imageLink_file_list)
+
+        for file_name in imageLink_file_list:
+            file_path = os.path.join(image_Link_folder_path, file_name)
+            file_size_bytes = os.path.getsize(file_path)  # 파일 크기를 바이트 단위로 가져옴
+
+            # KB 계산 (소수점 첫째 자리에서 올림하여 정수로 변환)
+            file_size_kb = file_size_bytes / 1024  # 킬로바이트로 변환
+            file_size_kb_rounded = math.ceil(file_size_kb)  # 소수점 첫째 자리에서 올림하여 정수
+
+            # MB 계산 (소수점 둘째 자리까지 출력)
+            file_size_mb = file_size_bytes / (1024 * 1024)  # 메가바이트로 변환
+            file_size_mb_rounded = round(file_size_mb, 2)  # 소수점 둘째 자리까지 반올림
+
+            if file_size_mb_rounded > 20:
+                image_link_over_size_list.append(f"{p_title} -- {file_name} 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
+
+
 
     video_over_size_list = []
     for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy().tolist():
@@ -141,8 +172,6 @@ def file_size_check(path):
                 '영상',
                 p_title,
             )
-
-
             video_folder_path = os.path.normpath(video_folder_path)  # 동영상 경로 표준화
 
         video_file_list = os.listdir(video_folder_path)
@@ -164,8 +193,9 @@ def file_size_check(path):
             if file_size_mb_rounded > 999:
                 video_over_size_list.append(f"{p_title} -- {file_name} 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
 
-    if len(image_over_size_list) > 0 or len(video_over_size_list) > 0:
+    if len(image_over_size_list) > 0 or len(video_over_size_list) > 0 or len(image_link_over_size_list) > 0:
         print(image_over_size_list)
+        print(image_link_over_size_list)
         print(video_over_size_list)
         print("용량 초과 파일이 발견되어서 프로그램 실행을 종료 합니다.")
         sys.exit()  # 프로그램을 종료합니다.
