@@ -31,6 +31,7 @@ import os
 import random
 from datetime import datetime
 from bs4 import BeautifulSoup
+import math
 
 import pywinauto
 from pywinauto import application
