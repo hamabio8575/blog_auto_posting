@@ -8,10 +8,11 @@ import downloaders
 import file_open
 
 # 파일들 사이즈 체크
-utils.file_size_check(path)
+
 
 path = file_open.new_paht
 print(path)
+utils.file_size_check(path)
 logger, file_handler = utils.setup_logging()
 
 # 한/영키 확인
