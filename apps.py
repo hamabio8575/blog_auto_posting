@@ -7,6 +7,8 @@ import utils
 import downloaders
 import file_open
 
+# 파일들 사이즈 체크
+utils.file_size_check()
 
 path = file_open.new_paht
 print(path)
