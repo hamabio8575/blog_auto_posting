@@ -151,7 +151,7 @@ def file_size_check():
         video_file_len = len(video_file_list)
 
         for file_name in video_file_list:
-            file_path = os.path.join(image_folder_path, file_name)
+            file_path = os.path.join(video_folder_path, file_name)
             file_size_bytes = os.path.getsize(file_path)  # 파일 크기를 바이트 단위로 가져옴
 
             # KB 계산 (소수점 첫째 자리에서 올림하여 정수로 변환)
