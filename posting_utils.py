@@ -196,7 +196,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     if img_link_cnt > imgLink_file_len:
                         pass
                     else:
-                        imageLink_file_path = rf"{imageLink_folder_path}\{imageLink_file_list[img_link_cnt+1]}"
+                        imageLink_file_path = rf"{imageLink_folder_path}\{imageLink_file_list[img_link_cnt-1]}"
 
                         # 샘플 복붙용창으로 이동
                         driver.switch_to.window(driver.window_handles[-1])
@@ -262,7 +262,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     if video_cnt > video_file_len:
                         pass
                     else:
-                        video_file_path = rf"{video_folder_path}\{video_file_list[video_cnt+1]}"
+                        video_file_path = rf"{video_folder_path}\{video_file_list[video_cnt-1]}"
 
                         # 원본창으로 이동
                         driver.switch_to.window(driver.window_handles[-2])
