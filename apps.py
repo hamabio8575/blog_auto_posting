@@ -55,12 +55,15 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         imageLink_folder_path = os.path.normpath(imageLink_folder_path)  # 이미지링크 경로 표준화
 
     image_file_list = os.listdir(image_folder_path)
+    image_file_list = sorted(image_file_list, key=utils.extract_number)
     img_file_len = len(image_file_list)
 
     video_file_list = os.listdir(video_folder_path)
+    video_file_list = sorted(video_file_list, key=utils.extract_number)
     video_file_len = len(video_file_list)
 
     imageLink_file_list = os.listdir(imageLink_folder_path)
+    imageLink_file_list = sorted(imageLink_file_list, key=utils.extract_number)
     imgLink_file_len = len(imageLink_file_list)
 
     print(f"이미지 경로 : {image_folder_path}")
@@ -76,6 +79,9 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     print(f"이미지링크 경로 : {imageLink_folder_path}")
     print(f"이미지링크 파일들 : {imageLink_file_list}")
     print(f"이미지링크 파일개수 : {imgLink_file_len}")
+
+
+    input()
 
     post_file_path = rf'{path}\자동업로드\{today_date}\원고\{p_title}.txt'
     post_file_path = os.path.normpath(post_file_path)  # 동영상 경로 표준화

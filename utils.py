@@ -62,3 +62,9 @@ def setup_logging():
     return logger, file_handler
 
 
+def extract_number(file_name):
+    # 정규표현식을 사용하여 괄호 안에 있는 숫자만 추출 (예: '이미지 (10).jpg'에서 10 추출)
+    match = re.search(r'\((\d+)\)', file_name)
+    if match:
+        return int(match.group(1))
+    return 0  # 숫자를 찾지 못하면 0을 반환 (필요시 다른 값을 반환하도록 수정 가능)
