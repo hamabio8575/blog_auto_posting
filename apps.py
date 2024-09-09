@@ -12,7 +12,7 @@ import file_open
 
 path = file_open.new_paht
 print(path)
-utils.file_size_check(path)
+utils.file_size_check(path, downloaders.new_model)
 logger, file_handler = utils.setup_logging()
 
 # 한/영키 확인

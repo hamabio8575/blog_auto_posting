@@ -70,7 +70,7 @@ def extract_number(file_name):
     return 0  # 숫자를 찾지 못하면 0을 반환 (필요시 다른 값을 반환하도록 수정 가능)
 
 
-def file_size_check(path):
+def file_size_check(path, model):
     ### 이미지 크기 체크
 
     today = datetime.today()
@@ -121,7 +121,7 @@ def file_size_check(path):
             file_size_mb_rounded = round(file_size_mb, 2)  # 소수점 둘째 자리까지 반올림
 
             if file_size_mb_rounded > 20:
-                image_over_size_list.append(f"{p_title} -- {file_name} 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
+                image_over_size_list.append(f"{p_title} -- 이미지 '{file_name}' 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
 
 
     image_link_over_size_list = []
@@ -157,7 +157,7 @@ def file_size_check(path):
             file_size_mb_rounded = round(file_size_mb, 2)  # 소수점 둘째 자리까지 반올림
 
             if file_size_mb_rounded > 20:
-                image_link_over_size_list.append(f"{p_title} -- {file_name} 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
+                image_link_over_size_list.append(f"{p_title} -- 이미지 링크 '{file_name}' 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
 
 
 
@@ -191,11 +191,12 @@ def file_size_check(path):
             file_size_mb_rounded = round(file_size_mb, 2)  # 소수점 둘째 자리까지 반올림
 
             if file_size_mb_rounded > 999:
-                video_over_size_list.append(f"{p_title} -- {file_name} 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
+                video_over_size_list.append(f"{p_title} -- 영상 '{file_name}' 제한사이즈 초과, {file_size_mb_rounded:.2f} MB")
 
     if len(image_over_size_list) > 0 or len(video_over_size_list) > 0 or len(image_link_over_size_list) > 0:
         print(image_over_size_list)
         print(image_link_over_size_list)
         print(video_over_size_list)
         print("용량 초과 파일이 발견되어서 프로그램 실행을 종료 합니다.")
+        model.textBrowser.append("★ 용량 초과 파일이 발견되어서 프로그램 실행을 종료 합니다.")
         sys.exit()  # 프로그램을 종료합니다.

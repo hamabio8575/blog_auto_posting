@@ -333,7 +333,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     # 볼드체
                     elif e == 'ⓑ':
                         is_numlock_on()
-                        p_len = len(bold_box[bold_cnt])
+                        try:
+                            p_len = len(bold_box[bold_cnt])
+                        except:
+                            print("볼드체 적용과정에서 문제가 발생했습니다. 원고에서 '②'또는 'ⓑ'가 제대로 입력되었는지 확인부탁드립니다.")
+                            continue
                         for _ in range(p_len):
                             pyautogui.hotkey('shift', 'left')
 
@@ -349,7 +353,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     # 밑줄
                     elif e == 'ⓤ':
                         is_numlock_on()
-                        p_len = len(underline_box[underline_cnt])
+                        try:
+                            p_len = len(underline_box[underline_cnt])
+                        except:
+                            print("밑줄 적용과정에서 문제가 발생했습니다. 원고에서 '③'또는 'ⓤ'가 제대로 입력되었는지 확인부탁드립니다.")
+                            continue
                         for _ in range(p_len):
                             pyautogui.hotkey('shift', 'left')
 
