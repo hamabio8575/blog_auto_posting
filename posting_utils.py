@@ -333,6 +333,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     time.sleep(1)
                     multi_img_folder_path =rf"{multi_img_folder_path}\{multi_img_cnt}"
                     # 탐색기 주소 창에 원하는 폴더 경로를 입력
+                    print(multi_img_folder_path)
                     autoit.control_set_text("열기", "Edit1", multi_img_folder_path)
                     time.sleep(1)
                     autoit.send("{ENTER}")

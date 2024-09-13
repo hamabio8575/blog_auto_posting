@@ -122,7 +122,6 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     with open(video_Link_folder_path, 'r') as file:
         videoLink_box = [line.strip() for line in file]
     print(videoLink_box)
-    input()
 
     # mvpn 접속
     dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
