@@ -331,7 +331,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     # 파일 탐색기 열기 대화상자에 포커스를 맞춤
                     autoit.control_focus("열기", "")
                     time.sleep(1)
-
+                    multi_img_folder_path =rf"{multi_img_folder_path}\{multi_img_cnt}"
                     # 탐색기 주소 창에 원하는 폴더 경로를 입력
                     autoit.control_set_text("열기", "Edit1", multi_img_folder_path)
                     time.sleep(1)
