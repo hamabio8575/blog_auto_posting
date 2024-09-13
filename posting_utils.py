@@ -14,8 +14,8 @@ def posting_effect(posting):
     inyoungu_box = re.compile(r'①(.*?)ⓟ').findall(posting)
     bold_box = re.compile(r'②(.*?)ⓑ').findall(posting)
     underline_box = re.compile(r'③(.*?)ⓤ').findall(posting)
-    breakline_box = re.compile(r'④(.*?)ⓗ').findall(posting)
-    return inyoungu_box, bold_box, underline_box, breakline_box
+    # breakline_box = re.compile(r'④(.*?)ⓗ').findall(posting)
+    return inyoungu_box, bold_box, underline_box
 
 
 def is_numlock_on():
@@ -29,7 +29,7 @@ def is_numlock_on():
         print("Num lock이 Off 입니다")
 
 
-def posting_run(write_contents, image_folder_path, img_file_len, video_folder_path, video_file_len, imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, driver, wait, post_title, p_title):
+def posting_run(write_contents, image_folder_path, img_file_len, video_folder_path, video_file_len, imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, videoLink_box, multi_img_folder_path, driver, wait, post_title, p_title):
     from string import ascii_lowercase, ascii_uppercase
     import time, pyautogui
 
@@ -63,8 +63,8 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                 r_lst.append([w])
         return r_lst
 
-    inyoungu_box, bold_box, underline_box, breakline_box = posting_effect(posting)
-    print(inyoungu_box, bold_box, underline_box, breakline_box)
+    inyoungu_box, bold_box, underline_box = posting_effect(posting)
+    print(inyoungu_box, bold_box, underline_box)
 
     # 포스팅 내용을 한글 음절 단위로 변환하여 리스트로 반환
     post_list = korean_to_be_englished(posting)
@@ -88,7 +88,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
         '-': '-', '=': '=', '~': '~', '`': '`', '{': '{', '}': '}', '[': '[', ']': ']', ';': ';', ':': ':', '"': '"',
         "'": "'", '<': '<', ',': ',', '>': '>', '.': '.', '?': '?', '/': '/',
         '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '0': '0',
-        '①': '①', 'ⓟ': 'ⓟ', '②': '②', 'ⓑ': 'ⓑ', '③': '③', 'ⓤ': 'ⓤ', '④': '④', 'ⓗ': 'ⓗ',
+        '①': '①', 'ⓟ': 'ⓟ', '②': '②', 'ⓑ': 'ⓑ', '③': '③', 'ⓤ': 'ⓤ', '④': '④', 'ⓗ': 'ⓗ', '⑤': '⑤', 'ⓥ': 'ⓥ'
     }
 
     # 영어를 한글 음절로 변환하는 딕셔너리 생성
@@ -139,6 +139,9 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
     img_cnt = 0
     video_cnt = 0
     img_link_cnt = 0
+    videolink_cnt = 0
+    multi_img_cnt = 0
+
 
     inyoungu_cnt = 0
     bold_cnt = 0
@@ -309,6 +312,49 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
                 elif e == '%':  # 구분선
                     pyautogui.hotkey('ctrl', 'alt', 'h')
+
+                # 동영상 링크
+                elif e == '④':
+                    pyperclip.copy(videoLink_box[videolink_cnt])
+                    pyautogui.hotkey('ctrl', 'v')
+                    videolink_cnt += 1
+                    time.sleep(10)
+
+                # 멀티이미지(슬라이드)
+                elif e == '⑤':
+                    multi_img_cnt += 1
+
+                    driver.find_element(By.CLASS_NAME,
+                                        'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
+                    time.sleep(2)
+
+                    # 파일 탐색기 열기 대화상자에 포커스를 맞춤
+                    autoit.control_focus("열기", "")
+                    time.sleep(1)
+
+                    # 탐색기 주소 창에 원하는 폴더 경로를 입력
+                    autoit.control_set_text("열기", "Edit1", multi_img_folder_path)
+                    time.sleep(1)
+                    autoit.send("{ENTER}")
+                    time.sleep(1)
+
+                    # 'Ctrl'을 눌러서 여러 파일 선택 (파일을 수동으로 선택해야 함)
+                    autoit.send("^a")  # 'Ctrl + A'로 전체 파일 선택
+                    time.sleep(1)
+
+                    # 열기 버튼 클릭
+                    autoit.control_click("열기", "Button1")
+                    time.sleep(1)
+
+                    driver.find_element(By.XPATH, "//label[@for='image-type-slide']").click()
+
+                    while True:
+                        if '전송중' in wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body'))).text:
+                            print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드중...")
+                            time.sleep(3)
+                        else:
+                            print(f"멀티이미지 ({multi_img_cnt}폴더) 업로 완료")
+                            break
 
                 else:
                     # 인용구 시작이면 인용구 삽입

@@ -53,9 +53,18 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
             p_title,
         )
 
+        multi_img_folder_path = os.path.join(
+            path,
+            "자동업로드",
+            today_date,
+            '멀티이미지',
+            p_title,
+        )
+
         image_folder_path = os.path.normpath(image_folder_path)  # 이미지 경로 표준화
         video_folder_path = os.path.normpath(video_folder_path)  # 동영상 경로 표준화
         imageLink_folder_path = os.path.normpath(imageLink_folder_path)  # 이미지링크 경로 표준화
+        multi_img_folder_path = os.path.normpath(multi_img_folder_path)
 
     image_file_list = os.listdir(image_folder_path)
     image_file_list = sorted(image_file_list, key=utils.extract_number)
@@ -68,6 +77,9 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     imageLink_file_list = os.listdir(imageLink_folder_path)
     imageLink_file_list = sorted(imageLink_file_list, key=utils.extract_number)
     imgLink_file_len = len(imageLink_file_list)
+
+    multiimg_file_list = os.listdir(multi_img_folder_path)
+    multiimg_file_list = sorted(multiimg_file_list, key=utils.extract_number)
 
     print(f"이미지 경로 : {image_folder_path}")
     print(f"이미지 파일들 : {image_file_list}")
@@ -83,19 +95,34 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     print(f"이미지링크 파일들 : {imageLink_file_list}")
     print(f"이미지링크 파일개수 : {imgLink_file_len}")
 
+    print()
+    print(f"멀티이미지 경로 : {multi_img_folder_path}")
+    print(f"멀티이미지 폴더들 : {multiimg_file_list}")
+
 
     post_file_path = rf'{path}\자동업로드\{today_date}\원고\{p_title}.txt'
     post_file_path = os.path.normpath(post_file_path)  # 동영상 경로 표준화
 
+    video_Link_folder_path = rf'{path}\자동업로드\{today_date}\영상 링크\{p_title}.txt'
+    video_Link_folder_path = os.path.normpath(video_Link_folder_path)  # 원고 경로 표준화
+    print()
+    print(f"영상 링크 경로 : {video_Link_folder_path}")
+
     print()
     print(f"포스팅 원고파일 경로 : {post_file_path}")
+
     # 파일 읽기
     with open(post_file_path, 'r', encoding='utf-8') as file:
         file.seek(0)  # 파일 포인터를 파일의 처음으로 이동 (첫줄이 빈문자열로 나오는걸 방지하기 위함)
         post_title = file.readline().strip() # 제목
         original_post = file.read() # 본문
-    # 출력 확인
     print(post_title)
+
+    # 영상링크 파일 불러오기
+    with open(video_Link_folder_path, 'r') as file:
+        videoLink_box = [line.strip() for line in file]
+    print(videoLink_box)
+    input()
 
     # mvpn 접속
     dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
@@ -181,7 +208,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     pyautogui.click(abs_x + 20, abs_y + 20)
     time.sleep(1)
     posting_utils.posting_run(post_title, image_folder_path, img_file_len, video_folder_path, video_file_len,
-                imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, driver, wait, post_title, p_title)
+                imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, videoLink_box, multi_img_folder_path, driver, wait, post_title, p_title)
     time.sleep(3)
 
     ### 본문 입력
@@ -198,7 +225,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     pyautogui.click(abs_x + 1000, abs_y + 200)
     time.sleep(3)
     posting_utils.posting_run(original_post, image_folder_path, img_file_len, video_folder_path, video_file_len,
-                              imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, driver, wait, post_title, p_title)
+                              imageLink_folder_path, imgLink_file_len, image_file_list, video_file_list, imageLink_file_list, videoLink_box, multi_img_folder_path, driver, wait, post_title, p_title)
 
     # 도움말 있는지 체크
     # 도움말이 있으면 발행버튼이 안눌림
