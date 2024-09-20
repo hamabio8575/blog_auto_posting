@@ -358,6 +358,10 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         if '전송중' in wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body'))).text:
                             print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드중...")
                             time.sleep(3)
+                            if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                                print('파일 전송 오류')
+                                driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                                break
                         else:
                             print(f"멀티이미지 ({multi_img_cnt}폴더) 업로 완료")
                             break
