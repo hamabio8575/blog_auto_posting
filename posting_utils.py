@@ -209,6 +209,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         # 사진 아이콘 클릭
                         # driver.find_element(By.CLASS_NAME,
                         #                     'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
+                        time.sleep(2)
                         pyautogui.hotkey('ctrl', 'alt', 'i')
                         time.sleep(2)
 
