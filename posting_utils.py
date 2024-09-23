@@ -324,6 +324,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                 # 멀티이미지(슬라이드)
                 elif e == '⑤':
                     multi_img_cnt += 1
+                    driver.switch_to.window(driver.window_handles[-2])
                     driver.switch_to.default_content()  # 기본 iframe으로 복귀
                     driver.switch_to.frame('mainFrame')
                     time.sleep(1)
