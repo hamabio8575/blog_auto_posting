@@ -331,11 +331,19 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     driver.find_element(By.CLASS_NAME,
                                         'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
 
-                    time.sleep(2)
+                    time.sleep(3)
 
                     # 파일 탐색기 열기 대화상자에 포커스를 맞춤
-                    autoit.control_focus("열기", "")
-                    time.sleep(1)
+                    try:
+                        autoit.control_focus("열기", "")
+                    except:
+                        print("Auto it Error")
+
+                        driver.find_element(By.CLASS_NAME,
+                                            'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
+                        time.sleep(3)
+                        autoit.control_focus("열기", "")
+
                     multi_img_folder_path_cnt =rf"{multi_img_folder_path}\{multi_img_cnt}"
                     # 탐색기 주소 창에 원하는 폴더 경로를 입력
                     print(multi_img_folder_path)
