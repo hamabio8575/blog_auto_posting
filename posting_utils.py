@@ -193,7 +193,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                             else:
                                 print(f"이미지 ({img_cnt}).jpg 업로드 완료")
                                 break
-
+                        time.sleep(3)
+                        if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                            print('파일 전송 오류')
+                            driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                            break
                 elif e == '@':  # 이미지 링크(라이브러리 제외)
                     img_link_cnt += 1
                     if img_link_cnt > imgLink_file_len:
@@ -227,6 +231,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                             else:
                                 print(f"이미지링크 ({img_link_cnt}).jpg 업로드 완료")
                                 break
+                        time.sleep(3)
+                        if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                            print('파일 전송 오류')
+                            driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                            break
 
                         ### 업로드한 이미지 찾아서 복사
 
@@ -310,7 +319,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                                 print(f"영상 ({video_cnt}).mp4 업로드 완료")
                                 time.sleep(3)
                                 break
-
+                        time.sleep(3)
+                        if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                            print('파일 전송 오류')
+                            driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                            break
                 elif e == '%':  # 구분선
                     pyautogui.hotkey('ctrl', 'alt', 'h')
 
@@ -331,7 +344,6 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
                     driver.find_element(By.CLASS_NAME,
                                         'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
-
                     time.sleep(3)
 
                     # 파일 탐색기 열기 대화상자에 포커스를 맞춤
@@ -367,13 +379,15 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         if '전송중' in wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body'))).text:
                             print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드중...")
                             time.sleep(3)
-                            if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
-                                print('파일 전송 오류')
-                                driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
-                                break
                         else:
                             print(f"멀티이미지 ({multi_img_cnt}폴더) 업로 완료")
                             break
+
+                    time.sleep(3)
+                    if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                        print('파일 전송 오류')
+                        driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                        break
 
                 else:
                     # 인용구 시작이면 인용구 삽입
