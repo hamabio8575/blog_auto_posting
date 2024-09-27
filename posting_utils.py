@@ -284,7 +284,9 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
                         # 동영상 클릭
                         # wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='동영상']"))).click()
-                        pyautogui.hotkey('ctrl', 'alt', 'm')
+                        # pyautogui.hotkey('ctrl', 'alt', 'm')
+                        wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-name='video']"))).click()
+                        time.sleep(1)
                         # 동영상 추가 클릭
                         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "nvu_btn_append.nvu_local"))).click()
                         time.sleep(2)
