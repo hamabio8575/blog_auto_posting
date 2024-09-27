@@ -78,7 +78,6 @@ def file_size_check(path, model):
     df = pd.read_excel("블로그 포스팅 세팅 파일.xlsx")
     df = df.iloc[:, :7]
 
-
     image_over_size_list = []
     for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy().tolist():
         print(p_title)

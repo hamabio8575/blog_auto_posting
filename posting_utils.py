@@ -383,11 +383,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                             print(f"멀티이미지 ({multi_img_cnt}폴더) 업로 완료")
                             break
 
-                    time.sleep(3)
-                    if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
-                        print('파일 전송 오류')
-                        driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
-                        break
+                        time.sleep(3)
+                        if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                            print('파일 전송 오류')
+                            driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                            break
 
                 else:
                     # 인용구 시작이면 인용구 삽입
