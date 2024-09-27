@@ -125,7 +125,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
 
     # mvpn 접속
     dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
-
+    time.sleep(5)
     ### 네이버 로그인
     headless_checked = False
     try:
