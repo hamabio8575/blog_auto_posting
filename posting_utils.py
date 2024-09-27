@@ -193,11 +193,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                             else:
                                 print(f"이미지 ({img_cnt}).jpg 업로드 완료")
                                 break
-                        time.sleep(3)
-                        if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
-                            print('파일 전송 오류')
-                            driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
-                            break
+                            time.sleep(3)
+                            if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                                print('파일 전송 오류')
+                                driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                                break
                 elif e == '@':  # 이미지 링크(라이브러리 제외)
                     img_link_cnt += 1
                     if img_link_cnt > imgLink_file_len:
@@ -231,11 +231,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                             else:
                                 print(f"이미지링크 ({img_link_cnt}).jpg 업로드 완료")
                                 break
-                        time.sleep(3)
-                        if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
-                            print('파일 전송 오류')
-                            driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
-                            break
+                            time.sleep(3)
+                            if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                                print('파일 전송 오류')
+                                driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                                break
 
                         ### 업로드한 이미지 찾아서 복사
 
@@ -319,11 +319,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                                 print(f"영상 ({video_cnt}).mp4 업로드 완료")
                                 time.sleep(3)
                                 break
-                        time.sleep(3)
-                        if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
-                            print('파일 전송 오류')
-                            driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
-                            break
+                            time.sleep(3)
+                            if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                                print('파일 전송 오류')
+                                driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                                break
                 elif e == '%':  # 구분선
                     pyautogui.hotkey('ctrl', 'alt', 'h')
 
