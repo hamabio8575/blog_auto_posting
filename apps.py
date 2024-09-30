@@ -124,7 +124,10 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     print(videoLink_box)
 
     # mvpn 접속
-    dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
+    try:
+        dlg = vpn_utils.mvpn_connect(vpn_id, vpn_pw)
+    except:
+        input("mvpn 접속 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
     time.sleep(5)
     ### 네이버 로그인
     headless_checked = False
@@ -139,7 +142,17 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
 
     driver.maximize_window()
     wait = WebDriverWait(driver, 10)
-    driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
+    try:
+        driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
+    except:
+        print("□ 드라이버 오픈 에러.. 30초후 재시작합니다.")
+        time.sleep(30)
+        try:
+            driver.close()
+            time.sleep(5)
+            driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
+        except:
+            driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
     time.sleep(1)
     wait, driver = driver_utils.naver_login(driver, wait, naver_id, naver_pw)  # 로그인 함수
 
@@ -249,7 +262,10 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         driver.close()
         time.sleep(0.5)
     time.sleep(3)
-    vpn_utils.mvpn_close(dlg)
+    try:
+        vpn_utils.mvpn_close(dlg)
+    except:
+        input("mvpn 종료 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
     time.sleep(3)
 
     minutes, seconds = utils.get_lab_time(start_time)
