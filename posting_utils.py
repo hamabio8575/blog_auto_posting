@@ -135,6 +135,8 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
     # 한글 입력 모드로 변경
     pyautogui.press('hangul')
 
+    multiimg_file_list = os.listdir(multi_img_folder_path)
+
     # 이미지 파일 카운트 변수 초기화
     img_cnt = 0
     video_cnt = 0
@@ -331,9 +333,10 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
                 # 동영상 링크
                 elif e == '④':
-                    if videolink_cnt > len(videoLink_box):
-                        pass
-                    pyperclip.copy(videoLink_box[videolink_cnt])
+                    try:
+                        pyperclip.copy(videoLink_box[videolink_cnt])
+                    except:
+                        continue
                     pyautogui.hotkey('ctrl', 'v')
                     videolink_cnt += 1
                     time.sleep(10)
@@ -341,6 +344,9 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                 # 멀티이미지(슬라이드)
                 elif e == '⑤':
                     multi_img_cnt += 1
+                    if multi_img_cnt > len(multiimg_file_list):
+                        continue
+
                     driver.switch_to.window(driver.window_handles[-2])
                     driver.switch_to.default_content()  # 기본 iframe으로 복귀
                     driver.switch_to.frame('mainFrame')
