@@ -331,6 +331,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                 elif e == '%':  # 구분선
                     pyautogui.hotkey('ctrl', 'alt', 'h')
 
+
                 # 동영상 링크
                 elif e == '④':
                     try:
