@@ -249,7 +249,13 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
                         panel_height = driver.execute_script('return window.outerHeight - window.innerHeight;')
                         # 이미지 element
-                        posting_image = driver.find_elements(By.TAG_NAME, 'section')[0].find_element(By.TAG_NAME, 'img')
+                        try:
+                            posting_image = driver.find_elements(By.TAG_NAME, 'section')[0].find_element(By.TAG_NAME, 'img')
+                        except Exception as e:
+                            print(e)
+                            time.sleep(5)
+                            posting_image = driver.find_elements(By.TAG_NAME, 'section')[0].find_element(By.TAG_NAME,
+                                                                                                         'img')
                         # 제목 입력 element의 x 값 가져오기 (절대값)
                         abs_x = posting_image.location['x'] + 200
                         # 제목 입력 element의 y 값 가져오기 (상대값, 브라우저에 있는 y값)
@@ -287,7 +293,13 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         # 동영상 클릭
                         # wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='동영상']"))).click()
                         # pyautogui.hotkey('ctrl', 'alt', 'm')
-                        wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-name='video']"))).click()
+                        try:
+                            wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-name='video']"))).click()
+                        except Exception as e:
+                            print(e)
+                            time.sleep(5)
+                            wait.until(
+                                EC.presence_of_element_located((By.XPATH, "//button[@data-name='video']"))).click()
                         time.sleep(1)
                         # 동영상 추가 클릭
                         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "nvu_btn_append.nvu_local"))).click()
