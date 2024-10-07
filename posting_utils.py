@@ -219,12 +219,24 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         pyautogui.hotkey('ctrl', 'alt', 'i')
                         time.sleep(2)
 
-                        autoit.control_focus("열기", "")
-                        time.sleep(1)
-                        autoit.control_set_text("열기", "Edit1", imageLink_file_path)
-                        time.sleep(1)
-                        autoit.control_click("열기", "Button1")
-                        time.sleep(1)
+                        try:
+                            autoit.control_focus("열기", "")
+                            time.sleep(1)
+                            autoit.control_set_text("열기", "Edit1", imageLink_file_path)
+                            time.sleep(1)
+                            autoit.control_click("열기", "Button1")
+                            time.sleep(1)
+                        except:
+                            time.sleep(10)
+                            pyautogui.hotkey('ctrl', 'alt', 'i')
+                            time.sleep(2)
+
+                            autoit.control_focus("열기", "")
+                            time.sleep(1)
+                            autoit.control_set_text("열기", "Edit1", imageLink_file_path)
+                            time.sleep(1)
+                            autoit.control_click("열기", "Button1")
+                            time.sleep(1)
 
                         while True:
                             if '전송중' in wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body'))).text:
