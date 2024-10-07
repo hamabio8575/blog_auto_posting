@@ -166,9 +166,16 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
     wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
     time.sleep(1)
 
-    driver.switch_to.window(driver.window_handles[-1])
-    driver.switch_to.default_content()  # 기본 iframe으로 복귀
-    driver.switch_to.frame('mainFrame')
+    try:
+        driver.switch_to.window(driver.window_handles[-1])
+        driver.switch_to.default_content()  # 기본 iframe으로 복귀
+        driver.switch_to.frame('mainFrame')
+    except Exception as e:
+        print(e)
+        time.sleep(10)
+        driver.switch_to.window(driver.window_handles[-1])
+        driver.switch_to.default_content()  # 기본 iframe으로 복귀
+        driver.switch_to.frame('mainFrame')
 
     # 작성 중인 글이 있습니다
     time.sleep(5)
