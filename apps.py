@@ -131,6 +131,7 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         print(e)
         input("mvpn 접속 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
     time.sleep(5)
+
     ### 네이버 로그인
     headless_checked = False
     try:
