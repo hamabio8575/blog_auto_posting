@@ -184,7 +184,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         try:
                             autoit.control_focus("열기", "")
                             time.sleep(1)
-                            autoit.control_set_text("열기", "Edit1", imageLink_file_path)
+                            autoit.control_set_text("열기", "Edit1", image_file_path)
                             time.sleep(1)
                             autoit.control_click("열기", "Button1")
                             time.sleep(1)
@@ -195,7 +195,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
                             autoit.control_focus("열기", "")
                             time.sleep(1)
-                            autoit.control_set_text("열기", "Edit1", imageLink_file_path)
+                            autoit.control_set_text("열기", "Edit1", image_file_path)
                             time.sleep(1)
                             autoit.control_click("열기", "Button1")
                             time.sleep(1)
