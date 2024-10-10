@@ -132,48 +132,86 @@ for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy
         input("mvpn 접속 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
     time.sleep(5)
 
-    ### 네이버 로그인
-    headless_checked = False
     try:
-        driver = driver_utils.driversetting(headless_checked)
-        print("driver 세팅 완료")
-    except:
-        print("☆ Error driver setting...")
-        print("30초후 재개 됩니다.")
-        time.sleep(30)
-        driver = driver_utils.driversetting(headless_checked)
-
-    driver.maximize_window()
-    wait = WebDriverWait(driver, 10)
-    try:
-        driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
-    except:
-        print("□ 드라이버 오픈 에러.. 30초후 재시작합니다.")
-        time.sleep(30)
+        ### 네이버 로그인
+        headless_checked = False
         try:
-            driver.close()
-            time.sleep(5)
+            driver = driver_utils.driversetting(headless_checked)
+            print("driver 세팅 완료")
+        except:
+            print("☆ Error driver setting...")
+            print("30초후 재개 됩니다.")
+            time.sleep(30)
+            driver = driver_utils.driversetting(headless_checked)
+
+        driver.maximize_window()
+        wait = WebDriverWait(driver, 10)
+        try:
             driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
         except:
-            driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
-    time.sleep(1)
-    wait, driver = driver_utils.naver_login(driver, wait, naver_id, naver_pw)  # 로그인 함수
+            print("□ 드라이버 오픈 에러.. 30초후 재시작합니다.")
+            time.sleep(30)
+            try:
+                driver.close()
+                time.sleep(5)
+                driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
+            except:
+                driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
+        time.sleep(1)
+        wait, driver = driver_utils.naver_login(driver, wait, naver_id, naver_pw)  # 로그인 함수
 
-    # 블로그 클릭
-    wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'service_icon.type_blog'))).click()
-    time.sleep(1)
-    # 글쓰기 클릭
-    driver.switch_to.window(driver.window_handles[-1])
-    wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
-    time.sleep(1)
+        # 블로그 클릭
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'service_icon.type_blog'))).click()
+        time.sleep(1)
+        # 글쓰기 클릭
+        driver.switch_to.window(driver.window_handles[-1])
+        wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
+        time.sleep(3)
 
-    try:
         driver.switch_to.window(driver.window_handles[-1])
         driver.switch_to.default_content()  # 기본 iframe으로 복귀
         driver.switch_to.frame('mainFrame')
-    except Exception as e:
-        print(e)
-        time.sleep(10)
+    except:
+        try:
+            driver_utils.driver_close(driver)
+        except:
+            pass
+
+        ### 네이버 로그인
+        headless_checked = False
+        try:
+            driver = driver_utils.driversetting(headless_checked)
+            print("driver 세팅 완료")
+        except:
+            print("☆ Error driver setting...")
+            print("30초후 재개 됩니다.")
+            time.sleep(30)
+            driver = driver_utils.driversetting(headless_checked)
+
+        driver.maximize_window()
+        wait = WebDriverWait(driver, 10)
+        try:
+            driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
+        except:
+            print("□ 드라이버 오픈 에러.. 30초후 재시작합니다.")
+            time.sleep(30)
+            try:
+                driver.close()
+                time.sleep(5)
+                driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
+            except:
+                driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/")
+        time.sleep(1)
+        wait, driver = driver_utils.naver_login(driver, wait, naver_id, naver_pw)  # 로그인 함수
+
+        # 블로그 클릭
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'service_icon.type_blog'))).click()
+        time.sleep(1)
+        # 글쓰기 클릭
+        driver.switch_to.window(driver.window_handles[-1])
+        wait.until(EC.presence_of_element_located((By.XPATH, "//a[text()='글쓰기']"))).click()
+        time.sleep(3)
+
         driver.switch_to.window(driver.window_handles[-1])
         driver.switch_to.default_content()  # 기본 iframe으로 복귀
         driver.switch_to.frame('mainFrame')
