@@ -199,3 +199,17 @@ def file_size_check(path, model):
         print("용량 초과 파일이 발견되어서 프로그램 실행을 종료 합니다.")
         model.textBrowser.append("★ 용량 초과 파일이 발견되어서 프로그램 실행을 종료 합니다.")
         sys.exit()  # 프로그램을 종료합니다.
+
+
+
+# 이어서 할수 있도록 오늘날짜 로그파일 받아와서 성공여부 확인하기
+def get_log_data_for_success():
+    today = datetime.now().strftime("%Y%m%d")
+    with open(f"{today} 로그.log", 'r') as log_file:
+        lines = log_file.readlines()
+        log_lines = [line.strip() for line in lines]  # Stripping newline characters for each line
+
+        success_data_list = []
+        for log_data in log_lines:
+            success_data_list.append(log_data.split("-")[5].strip())
+    return success_data_list

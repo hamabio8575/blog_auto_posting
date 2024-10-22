@@ -9,7 +9,7 @@ def mvpn_connect(model, mvpn_id, mvpn_pw):
     # for proc in procs:
     #     print(f"{proc} / 프로세스 : {proc.process_id}")
     print(f"■VPN 접속시도({mvpn_id})")
-    model.textBrowser.append(f"■VPN 접속시도({mvpn_id})")
+    model.textBrowser.append(f"■ VPN 접속시도({mvpn_id})")
     app = application.Application(backend='uia')
 
     # 프로세스의 경로를 넣어 실행해준다.

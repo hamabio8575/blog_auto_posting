@@ -387,7 +387,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     driver.switch_to.window(driver.window_handles[-2])
                     driver.switch_to.default_content()  # 기본 iframe으로 복귀
                     driver.switch_to.frame('mainFrame')
-                    time.sleep(1)
+                    time.sleep(3)
 
                     driver.find_element(By.CLASS_NAME,
                                         'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
