@@ -28,7 +28,7 @@ completed_titles = []  # 완료된 p_title을 저장할 리스트
 while True:
     for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy().tolist():
         # try:
-        success_data_list = get_log_data_for_success()
+        success_data_list = utils.get_log_data_for_success()
         print(success_data_list)
         print(p_title)
         if p_title in success_data_list:
