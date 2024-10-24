@@ -23,8 +23,6 @@ today_date = utils.get_today_date()  # 오늘 날짜 확인 // format : 5월24�
 df = pd.read_excel("블로그 포스팅 세팅 파일.xlsx")
 df = df.iloc[:, :7]
 
-completed_titles = []  # 완료된 p_title을 저장할 리스트
-
 while True:
     for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy().tolist():
         # try:
@@ -328,12 +326,13 @@ while True:
         downloaders.new_model.textBrowser.append(f"■ [{number}] {post_title} 포스팅 완료.  소요시간 : {minutes}분 {seconds}초")
         logger.debug(f"{p_title}- ■ [{number}] {post_title} 포스팅 완료.  소요시간 : {minutes}분 {seconds}초")
 
-    completed_titles = list(set(completed_titles))
+    success_data_list = utils.get_log_data_for_success()
+    success_data_list = list(set(success_data_list))
     # 모든 p_title이 완료되었는지 확인
-    print(len(completed_titles))
+    print(len(success_data_list))
     print(len(df))
     print(len(df['p_title']))
-    if len(completed_titles) == len(df):
+    if len(success_data_list) == len(df):
         break  # 모든 p_title이 완료되면 while 문 종료
 
         # except Exception as e:
