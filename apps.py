@@ -332,6 +332,7 @@ while True:
     print(len(success_data_list))
     print(len(df))
     if len(success_data_list) == len(df):
+        print(f"■ 포스팅 모두 완료.")
         break  # 모든 p_title이 완료되면 while 문 종료
 
         # except Exception as e:
