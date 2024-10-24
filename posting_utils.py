@@ -319,15 +319,20 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                         # pyautogui.hotkey('ctrl', 'alt', 'm')
                         try:
                             wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-name='video']"))).click()
+                            time.sleep(3)
+                            # 동영상 추가 클릭
+                            wait.until(
+                                EC.presence_of_element_located((By.CLASS_NAME, "nvu_btn_append.nvu_local"))).click()
+                            time.sleep(3)
                         except Exception as e:
                             print(e)
-                            time.sleep(5)
+                            time.sleep(10)
                             wait.until(
                                 EC.presence_of_element_located((By.XPATH, "//button[@data-name='video']"))).click()
-                        time.sleep(1)
-                        # 동영상 추가 클릭
-                        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "nvu_btn_append.nvu_local"))).click()
-                        time.sleep(2)
+                            time.sleep(3)
+                            # 동영상 추가 클릭
+                            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "nvu_btn_append.nvu_local"))).click()
+                            time.sleep(3)
 
                         # 영상파일 선택
                         autoit.control_focus("열기", "")
@@ -364,6 +369,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                                 print('파일 전송 오류')
                                 driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
                                 break
+
                 elif e == '%':  # 구분선
                     pyautogui.hotkey('ctrl', 'alt', 'h')
 
@@ -435,6 +441,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                             print('파일 전송 오류')
                             driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
                             break
+                    time.sleep(3)
 
                 else:
                     # 인용구 시작이면 인용구 삽입
