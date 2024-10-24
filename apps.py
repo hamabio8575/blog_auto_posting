@@ -331,7 +331,7 @@ while True:
     # 모든 p_title이 완료되었는지 확인
     print(len(success_data_list))
     print(len(df))
-    print(len(df['p_title']))
+    print(len(df['번호']))
     if len(success_data_list) == len(df):
         break  # 모든 p_title이 완료되면 while 문 종료
 
