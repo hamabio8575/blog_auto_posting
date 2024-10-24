@@ -330,6 +330,9 @@ while True:
 
     completed_titles = list(set(completed_titles))
     # 모든 p_title이 완료되었는지 확인
+    print(len(completed_titles))
+    print(len(df))
+    print(len(df['p_title']))
     if len(completed_titles) == len(df):
         break  # 모든 p_title이 완료되면 while 문 종료
 
