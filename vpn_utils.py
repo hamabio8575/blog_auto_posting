@@ -27,7 +27,11 @@ def mvpn_connect(model, mvpn_id, mvpn_pw):
     time.sleep(5)
 
     # 접속하기 버튼 클릭
-    autoit.control_click("Dialog", "Button3")
+    while True:
+        try:
+            autoit.control_click("Dialog", "Button3")
+        except:
+            time.sleep(5)
 
     while True:
         connect_status = autoit.control_get_text("Dialog", "Static4")
