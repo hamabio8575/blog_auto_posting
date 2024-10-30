@@ -202,8 +202,11 @@ def file_size_check(path, model):
 
 
 
-# 이어서 할수 있도록 오늘날짜 로그파일 받아와서 성공여부 확인하기
 def get_log_data_for_success():
+    """
+    이어서 할수 있도록 오늘날짜 로그파일 받아와서 성공여부 확인하기
+    :return: 성공한 포스팅 리스트
+    """
     today = datetime.now().strftime("%Y%m%d")
     with open(f"{today} 로그.log", 'r') as log_file:
         lines = log_file.readlines()

@@ -454,6 +454,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
 
                     # 멀티이미지 슬라이드 방식 선택
                     wait.until(EC.presence_of_element_located((By.XPATH, "//label[@for='image-type-slide']"))).click()
+
                     while True:
                         if '전송중' in wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body'))).text:
                             print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드중...")
