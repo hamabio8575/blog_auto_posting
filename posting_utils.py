@@ -395,39 +395,64 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     driver.switch_to.frame('mainFrame')
                     time.sleep(3)
 
-                    driver.find_element(By.CLASS_NAME,
-                                        'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
+                    # driver.find_element(By.CLASS_NAME,
+                    #                     'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
+                    wait.until(EC.presence_of_element_located((By.CLASS_NAME,
+                                                               "se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry"))).click()
                     time.sleep(3)
 
-                    # 파일 탐색기 열기 대화상자에 포커스를 맞춤
+                    # 웹상의 사진 업로드 버튼을 클릭후 파일탐색창이 정상적으로 업로드 되었는지 체크
                     try:
-                        autoit.control_focus("열기", "")
-                    except:
-                        print("Auto it Error")
+                        autoit.win_wait_active("열기", 5)
+                        print("팝업완료")
+                    except autoit.AutoItError:
+                        # 파일 탐색창이 업로드 되지 않았다면 사진 업로드 버튼 다시 클릭
+                        print("팝업X - 타임아웃 발생, 재시도...")
+                        time.sleep(5)
+                        # driver.find_element(By.CLASS_NAME,
+                        #                     'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
+                        wait.until(EC.presence_of_element_located((By.CLASS_NAME,
+                                                                   "se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry"))).click()
+                        print("팝업완료")
+                    time.sleep(3)
 
-                        driver.find_element(By.CLASS_NAME,
-                                            'se-image-toolbar-button.se-document-toolbar-basic-button.se-text-icon-toolbar-button.__se-sentry').click()
-                        time.sleep(3)
-                        autoit.control_focus("열기", "")
-
+                    # 파일 탐색창을 선택
+                    # "열기"는 파일탐색창 좌측 상단에 있는 title명
+                    autoit.win_activate("열기")
                     multi_img_folder_path_cnt =rf"{multi_img_folder_path}\{multi_img_cnt}"
-                    # 탐색기 주소 창에 원하는 폴더 경로를 입력
-                    print(multi_img_folder_path)
+
+                    # 파일 탐색창에 선택하고자 하는 파일의 경로 입력후 엔터
                     autoit.control_set_text("열기", "Edit1", multi_img_folder_path_cnt)
                     time.sleep(1)
                     autoit.send("{ENTER}")
                     time.sleep(1)
 
-                    # 'Ctrl'을 눌러서 여러 파일 선택 (파일을 수동으로 선택해야 함)
+                    # 파일 탐색창을 선택
+                    autoit.win_activate("열기")
+
+                    # 파일 탐색창의 파일을 선택할수 있는 영역을 선택
+                    autoit.control_focus("열기", "DirectUIHWND2")
+                    # 파일 전체 선택후 엔터
                     autoit.send("^a")  # 'Ctrl + A'로 전체 파일 선택
                     time.sleep(1)
+                    autoit.send("{ENTER}")
 
-                    # 열기 버튼 클릭
-                    autoit.control_click("열기", "Button1")
-                    time.sleep(1)
+                    # 파일선택후 열기버튼을 클릭한후 탐색창이 정상적으로 닫혔는지 구분
+                    # 안닫혔으면 닫힐때까지 시도
+                    while autoit.win_exists("열기"):
+                        print("??")
+                        # 파일 탐색창을 선택
+                        autoit.win_activate("열기")
+                        # 파일 탐색창의 파일을 선택할수 있는 영역을 선택
+                        autoit.control_focus("열기", "DirectUIHWND2")
+                        # 파일 전체 선택후 엔터
+                        autoit.send("^a")  # 'Ctrl + A'로 전체 파일 선택
+                        time.sleep(1)
+                        autoit.send("{ENTER}")
+                        time.sleep(2)
 
-                    driver.find_element(By.XPATH, "//label[@for='image-type-slide']").click()
-
+                    # 멀티이미지 슬라이드 방식 선택
+                    wait.until(EC.presence_of_element_located((By.XPATH, "//label[@for='image-type-slide']"))).click()
                     while True:
                         if '전송중' in wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body'))).text:
                             print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드중...")
