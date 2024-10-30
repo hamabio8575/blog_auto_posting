@@ -30,6 +30,7 @@ def mvpn_connect(model, mvpn_id, mvpn_pw):
     while True:
         try:
             autoit.control_click("Dialog", "Button3")
+            break
         except:
             time.sleep(5)
 
