@@ -22,6 +22,7 @@ def mvpn_connect(model, mvpn_id, mvpn_pw):
 
     # 로그인 버튼 클릭
     time.sleep(1)
+    autoit.win_activate("mVPN")
     autoit.control_click("mvpn", "Button1")
     time.sleep(5)
 
