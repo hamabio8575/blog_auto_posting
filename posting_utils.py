@@ -436,6 +436,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     autoit.send("^a")  # 'Ctrl + A'로 전체 파일 선택
                     time.sleep(1)
                     autoit.send("{ENTER}")
+                    time.sleep(3)
 
                     # 파일선택후 열기버튼을 클릭한후 탐색창이 정상적으로 닫혔는지 구분
                     # 안닫혔으면 닫힐때까지 시도
