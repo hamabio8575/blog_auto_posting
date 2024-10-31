@@ -17,6 +17,7 @@ def mvpn_connect(model, mvpn_id, mvpn_pw):
     app.start(r"C:\Program Files (x86)\mvpn\mvpn.exe")
 
     dlg = app['mvpn']  # 변수에 mvpn 윈도우 어플리케이션 객체를 할당
+    dlg2 = app['mvpn']
     # dlg.print_control_identifiers()  #속성값들 확인
     time.sleep(3)
 
@@ -52,14 +53,15 @@ def mvpn_connect(model, mvpn_id, mvpn_pw):
             break
         else:
             time.sleep(1)
-    return dlg
+    return dlg, dlg2
 
 
 # mpv 닫기
-def mvpn_close(dlg):
+def mvpn_close(dlg, dlg2):
     dlg['Button6'].click()  # 닫기 버튼 클릭
     time.sleep(2)
-    dlg['Button'].click()  # Alert창 예 버튼 클릭
+    # dlg['Button'].click()  # Alert창 예 버튼 클릭
+    dlg2['Button1'].click()
     time.sleep(1)
     print("mvpn 종료")
     time.sleep(1)
