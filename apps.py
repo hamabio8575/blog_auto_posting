@@ -132,8 +132,7 @@ while True:
         # mvpn 접속
         try:
             print("1")
-            # dlg = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
-            vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
+            dlg, dlg2 = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
         except Exception as e:
             print(e)
             input("mvpn 접속 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
@@ -317,11 +316,20 @@ while True:
             time.sleep(0.5)
         time.sleep(3)
         try:
-            # vpn_utils.mvpn_close(dlg)
-            vpn_utils.mvpn_close()
+            vpn_utils.mvpn_close(dlg, dlg2)
         except:
-            input("mvpn 종료 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
-        time.sleep(3)
+            print("mvpn 종료 에러")
+            dlg['Button6'].click()  # 닫기 버튼 클릭
+            time.sleep(2)
+            dlg['Button'].click()  # Alert창 예 버튼 클릭
+            time.sleep(1)
+            print("mvpn 종료")
+            time.sleep(1)
+        # try:
+        #     vpn_utils.mvpn_close(dlg)
+        # except:
+        #     input("mvpn 종료 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
+        # time.sleep(3)
 
         minutes, seconds = utils.get_lab_time(start_time)
         print(f"■ [{number}] {post_title} 포스팅 완료.  소요시간 : {minutes}분 {seconds}초")
