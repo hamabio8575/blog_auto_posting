@@ -9,134 +9,140 @@ import file_open
 
 # 파일들 사이즈 체크
 
+mvpn_id, mvpn_pw = "hama75", "hama123!"
+dlg = vpn_utils.mvpn_connect(downloaders.new_model, mvpn_id, mvpn_pw)
+time.sleep(3)
 
-path = file_open.new_paht
-print(path)
-utils.file_size_check(path, downloaders.new_model)
-logger, file_handler = utils.setup_logging()
-
-# 한/영키 확인
-utils.ko_eng_checked()
-
-today = datetime.today()
-today_date = utils.get_today_date()  # 오늘 날짜 확인 // format : 5월24일
-df = pd.read_excel("블로그 포스팅 세팅 파일.xlsx")
-df = df.iloc[:, :7]
-
-while True:
-    for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy().tolist():
-        # try:
-        success_data_list = utils.get_log_data_for_success()
-        print(success_data_list)
-        print(p_title)
-        if p_title in success_data_list:
-            continue
-
-        start_time = time.time()
-        if path:
-            # 이미지 경로 생성
-            image_folder_path = os.path.join(
-                path,
-                "자동업로드",
-                today_date,
-                '이미지',
-                p_title,
-            )
-
-            video_folder_path = os.path.join(
-                path,
-                "자동업로드",
-                today_date,
-                '영상',
-                p_title,
-            )
-
-            imageLink_folder_path = os.path.join(
-                path,
-                "자동업로드",
-                today_date,
-                '이미지링크',
-                p_title,
-            )
-
-            multi_img_folder_path = os.path.join(
-                path,
-                "자동업로드",
-                today_date,
-                '멀티이미지',
-                p_title,
-            )
-
-            image_folder_path = os.path.normpath(image_folder_path)  # 이미지 경로 표준화
-            video_folder_path = os.path.normpath(video_folder_path)  # 동영상 경로 표준화
-            imageLink_folder_path = os.path.normpath(imageLink_folder_path)  # 이미지링크 경로 표준화
-            multi_img_folder_path = os.path.normpath(multi_img_folder_path)
-
-        image_file_list = os.listdir(image_folder_path)
-        image_file_list = sorted(image_file_list, key=utils.extract_number)
-        img_file_len = len(image_file_list)
-
-        video_file_list = os.listdir(video_folder_path)
-        video_file_list = sorted(video_file_list, key=utils.extract_number)
-        video_file_len = len(video_file_list)
-
-        imageLink_file_list = os.listdir(imageLink_folder_path)
-        imageLink_file_list = sorted(imageLink_file_list, key=utils.extract_number)
-        imgLink_file_len = len(imageLink_file_list)
-
-        multiimg_file_list = os.listdir(multi_img_folder_path)
-        multiimg_file_list = sorted(multiimg_file_list, key=utils.extract_number)
-
-        print(f"이미지 경로 : {image_folder_path}")
-        print(f"이미지 파일들 : {image_file_list}")
-        print(f"이미지 파일개수 : {img_file_len}")
-
-        print()
-        print(f"동영상 경로 : {video_folder_path}")
-        print(f"동영상 파일들 : {video_file_list}")
-        print(f"동영상 파일개수 : {video_file_len}")
-
-        print()
-        print(f"이미지링크 경로 : {imageLink_folder_path}")
-        print(f"이미지링크 파일들 : {imageLink_file_list}")
-        print(f"이미지링크 파일개수 : {imgLink_file_len}")
-
-        print()
-        print(f"멀티이미지 경로 : {multi_img_folder_path}")
-        print(f"멀티이미지 폴더들 : {multiimg_file_list}")
+vpn_utils.mvpn_close(dlg)
 
 
-        post_file_path = rf'{path}\자동업로드\{today_date}\원고\{p_title}.txt'
-        post_file_path = os.path.normpath(post_file_path)  # 동영상 경로 표준화
-
-        video_Link_folder_path = rf'{path}\자동업로드\{today_date}\영상 링크\{p_title}.txt'
-        video_Link_folder_path = os.path.normpath(video_Link_folder_path)  # 원고 경로 표준화
-        print()
-        print(f"영상 링크 경로 : {video_Link_folder_path}")
-
-        print()
-        print(f"포스팅 원고파일 경로 : {post_file_path}")
-
-        # 파일 읽기
-        with open(post_file_path, 'r', encoding='utf-8') as file:
-            file.seek(0)  # 파일 포인터를 파일의 처음으로 이동 (첫줄이 빈문자열로 나오는걸 방지하기 위함)
-            post_title = file.readline().strip() # 제목
-            original_post = file.read() # 본문
-        print(post_title)
-
-        # 영상링크 파일 불러오기
-        with open(video_Link_folder_path, 'r') as file:
-            videoLink_box = [line.strip() for line in file]
-        print(videoLink_box)
-
-        # mvpn 접속
-        try:
-            print("1")
-            dlg, dlg2 = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
-        except Exception as e:
-            print(e)
-            input("mvpn 접속 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
-        time.sleep(5)
+# path = file_open.new_paht
+# print(path)
+# utils.file_size_check(path, downloaders.new_model)
+# logger, file_handler = utils.setup_logging()
+#
+# # 한/영키 확인
+# utils.ko_eng_checked()
+#
+# today = datetime.today()
+# today_date = utils.get_today_date()  # 오늘 날짜 확인 // format : 5월24일
+# df = pd.read_excel("블로그 포스팅 세팅 파일.xlsx")
+# df = df.iloc[:, :7]
+#
+# while True:
+#     for number, naver_id, naver_pw, vpn_name, vpn_id, vpn_pw, p_title in df.to_numpy().tolist():
+#         # try:
+#         success_data_list = utils.get_log_data_for_success()
+#         print(success_data_list)
+#         print(p_title)
+#         if p_title in success_data_list:
+#             continue
+#
+#         start_time = time.time()
+#         if path:
+#             # 이미지 경로 생성
+#             image_folder_path = os.path.join(
+#                 path,
+#                 "자동업로드",
+#                 today_date,
+#                 '이미지',
+#                 p_title,
+#             )
+#
+#             video_folder_path = os.path.join(
+#                 path,
+#                 "자동업로드",
+#                 today_date,
+#                 '영상',
+#                 p_title,
+#             )
+#
+#             imageLink_folder_path = os.path.join(
+#                 path,
+#                 "자동업로드",
+#                 today_date,
+#                 '이미지링크',
+#                 p_title,
+#             )
+#
+#             multi_img_folder_path = os.path.join(
+#                 path,
+#                 "자동업로드",
+#                 today_date,
+#                 '멀티이미지',
+#                 p_title,
+#             )
+#
+#             image_folder_path = os.path.normpath(image_folder_path)  # 이미지 경로 표준화
+#             video_folder_path = os.path.normpath(video_folder_path)  # 동영상 경로 표준화
+#             imageLink_folder_path = os.path.normpath(imageLink_folder_path)  # 이미지링크 경로 표준화
+#             multi_img_folder_path = os.path.normpath(multi_img_folder_path)
+#
+#         image_file_list = os.listdir(image_folder_path)
+#         image_file_list = sorted(image_file_list, key=utils.extract_number)
+#         img_file_len = len(image_file_list)
+#
+#         video_file_list = os.listdir(video_folder_path)
+#         video_file_list = sorted(video_file_list, key=utils.extract_number)
+#         video_file_len = len(video_file_list)
+#
+#         imageLink_file_list = os.listdir(imageLink_folder_path)
+#         imageLink_file_list = sorted(imageLink_file_list, key=utils.extract_number)
+#         imgLink_file_len = len(imageLink_file_list)
+#
+#         multiimg_file_list = os.listdir(multi_img_folder_path)
+#         multiimg_file_list = sorted(multiimg_file_list, key=utils.extract_number)
+#
+#         print(f"이미지 경로 : {image_folder_path}")
+#         print(f"이미지 파일들 : {image_file_list}")
+#         print(f"이미지 파일개수 : {img_file_len}")
+#
+#         print()
+#         print(f"동영상 경로 : {video_folder_path}")
+#         print(f"동영상 파일들 : {video_file_list}")
+#         print(f"동영상 파일개수 : {video_file_len}")
+#
+#         print()
+#         print(f"이미지링크 경로 : {imageLink_folder_path}")
+#         print(f"이미지링크 파일들 : {imageLink_file_list}")
+#         print(f"이미지링크 파일개수 : {imgLink_file_len}")
+#
+#         print()
+#         print(f"멀티이미지 경로 : {multi_img_folder_path}")
+#         print(f"멀티이미지 폴더들 : {multiimg_file_list}")
+#
+#
+#         post_file_path = rf'{path}\자동업로드\{today_date}\원고\{p_title}.txt'
+#         post_file_path = os.path.normpath(post_file_path)  # 동영상 경로 표준화
+#
+#         video_Link_folder_path = rf'{path}\자동업로드\{today_date}\영상 링크\{p_title}.txt'
+#         video_Link_folder_path = os.path.normpath(video_Link_folder_path)  # 원고 경로 표준화
+#         print()
+#         print(f"영상 링크 경로 : {video_Link_folder_path}")
+#
+#         print()
+#         print(f"포스팅 원고파일 경로 : {post_file_path}")
+#
+#         # 파일 읽기
+#         with open(post_file_path, 'r', encoding='utf-8') as file:
+#             file.seek(0)  # 파일 포인터를 파일의 처음으로 이동 (첫줄이 빈문자열로 나오는걸 방지하기 위함)
+#             post_title = file.readline().strip() # 제목
+#             original_post = file.read() # 본문
+#         print(post_title)
+#
+#         # 영상링크 파일 불러오기
+#         with open(video_Link_folder_path, 'r') as file:
+#             videoLink_box = [line.strip() for line in file]
+#         print(videoLink_box)
+#
+#         # mvpn 접속
+#         try:
+#             print("1")
+#             dlg, dlg2 = vpn_utils.mvpn_connect(downloaders.new_model, vpn_id, vpn_pw)
+#         except Exception as e:
+#             print(e)
+#             input("mvpn 접속 에러... 현재상태 캡쳐 부탁드리고, 터미널창에 엔터 입력후 ui가 종료되는지 체크 부탁드립니다.")
+#         time.sleep(5)
 
         # ### 네이버 로그인
         # try:
@@ -315,18 +321,10 @@ while True:
         #     driver.close()
         #     time.sleep(0.5)
         # time.sleep(3)
-        try:
-            vpn_utils.mvpn_close(dlg, dlg2)
-            input()
-        except:
-            print("mvpn 종료 에러")
-            dlg['Button6'].click()  # 닫기 버튼 클릭
-            time.sleep(2)
-            dlg['Button'].click()  # Alert창 예 버튼 클릭
-            time.sleep(1)
-            print("mvpn 종료")
-            time.sleep(1)
-            input()
+
+        # vpn_utils.mvpn_close(dlg, dlg2)
+
+
         # try:
         #     vpn_utils.mvpn_close(dlg)
         # except:

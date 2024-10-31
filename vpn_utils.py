@@ -53,15 +53,14 @@ def mvpn_connect(model, mvpn_id, mvpn_pw):
             break
         else:
             time.sleep(1)
-    return dlg, dlg2
+    return dlg
 
 
 # mpv 닫기
-def mvpn_close(dlg, dlg2):
+def mvpn_close(dlg):
     dlg['Button6'].click()  # 닫기 버튼 클릭
     time.sleep(2)
-    # dlg['Button'].click()  # Alert창 예 버튼 클릭
-    dlg2['Button1'].click()
+    dlg['Button'].click()  # Alert창 예 버튼 클릭
     time.sleep(1)
     print("mvpn 종료")
     time.sleep(1)
