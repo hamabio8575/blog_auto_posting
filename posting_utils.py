@@ -456,18 +456,20 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                     wait.until(EC.presence_of_element_located((By.XPATH, "//label[@for='image-type-slide']"))).click()
 
                     while True:
-                        if '전송중' in wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body'))).text:
+                        body_text = wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body'))).text
+                        if '업로드 준비 중입니다' in body_text:
                             print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드중...")
-                            time.sleep(3)
-                        else:
-                            print(f"멀티이미지 ({multi_img_cnt}폴더) 업로 완료")
-                            break
 
-                        time.sleep(3)
-                        if '파일 전송 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                        elif '파일 전송 오류' in body_text:
                             print('파일 전송 오류')
-                            driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
+                            wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'se-popup-button.se-popup-button-confirm'))).click()
                             break
+                        else:
+                            if '/' not in body_text:
+                                time.sleep(3)
+                                print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드 완료")
+                                break
+                        time.sleep(3)
                     time.sleep(3)
 
                 else:
