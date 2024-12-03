@@ -465,7 +465,7 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                             wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'se-popup-button.se-popup-button-confirm'))).click()
                             break
                         else:
-                            if '/' not in body_text:
+                            if body_text.split("\n")[-1] == '팝업 닫기':
                                 time.sleep(3)
                                 print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드 완료")
                                 break
