@@ -212,6 +212,12 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                                 print('파일 전송 오류')
                                 driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
                                 break
+
+                        if '붙여넣기 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                            print('붙여넣기 전송 오류')
+                            driver.find_element(By.CLASS_NAME, "se-popup-button-container").click()
+                            time.sleep(3)
+
                 elif e == '@':  # 이미지 링크(라이브러리 제외)
                     img_link_cnt += 1
                     if img_link_cnt > imgLink_file_len:
@@ -263,6 +269,10 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                                 driver.find_element(By.CLASS_NAME, "se-popup-button.se-popup-button-confirm").click()
                                 break
 
+                        if '붙여넣기 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                            print('붙여넣기 전송 오류')
+                            driver.find_element(By.CLASS_NAME, "se-popup-button-container").click()
+                            time.sleep(3)
                         ### 업로드한 이미지 찾아서 복사
 
                         # 이미지 업로드후 젤 위로 이동
@@ -469,6 +479,11 @@ def posting_run(write_contents, image_folder_path, img_file_len, video_folder_pa
                                 time.sleep(3)
                                 print(f"멀티이미지 ({multi_img_cnt}폴더) 업로드 완료")
                                 break
+                        time.sleep(3)
+
+                    if '붙여넣기 오류' in driver.find_element(By.TAG_NAME, 'body').text:
+                        print('붙여넣기 전송 오류')
+                        driver.find_element(By.CLASS_NAME, "se-popup-button-container").click()
                         time.sleep(3)
                     time.sleep(3)
 
